@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <!-- Prato 10x: bootstrap de tracking antes de qualquer tag externa. -->
+    <script>
+      (function(w) {
+        var params = new URLSearchParams(w.location.search);
+        var internalTest = params.get('internal_test') === '1';
+
+        w.__PRATO10X_INTERNAL_TEST__ = internalTest;
+        w.dataLayer = w.dataLayer || [];
+        w.dataLayer.push({
+          event: 'prato10x_boot',
+          internal_test: internalTest ? '1' : '0',
+          debug_mode: internalTest
+        });
+
+        if (internalTest) {
+          /*
+           * Em QA, o Meta Pixel de produção fica neutralizado antes do GTM.
+           * Isso também impede snippets Meta padrão disparados pelo GTM de
+           * inicializarem o fbq nessa sessão.
+           */
+          var noop = function() {};
+          noop.callMethod = noop;
+          noop.queue = [];
+          noop.push = noop;
+          noop.loaded = true;
+          noop.version = '2.0';
+          w.fbq = noop;
+          w._fbq = noop;
+          console.info('[Prato 10x] Modo teste: Meta Pixel de produção bloqueado.');
+        }
+      })(window);
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-KSGSGL26');
+    </script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f2e9" />
+    <meta name="description" content="Se você está comendo menos, saber o que merece espaço no prato se tornou ainda mais importante. 37 dias de experiência para escolher com mais clareza e menos improviso." />
+    <meta property="og:title" content="Prato 10x — Refeições menores, escolhas mais inteligentes" />
+    <meta property="og:description" content="37 dias de experiência, referências e ferramentas práticas para escolher com mais clareza e menos improviso." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-prato10x.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet" />
+    <title>Prato 10x — Refeições menores, escolhas mais inteligentes</title>
+
+    <!-- Meta Pixel Code: produção somente -->
+    <script>
+      if (!window.__PRATO10X_INTERNAL_TEST__) {
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '2073559566628743');
+        fbq('track', 'PageView');
+      }
+    </script>
+    <!-- End Meta Pixel Code -->
+  </head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KSGSGL26"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+        title="Google Tag Manager"
+      ></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Meta Pixel Code - noscript -->
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display:none"
+        src="https://www.facebook.com/tr?id=2073559566628743&ev=PageView&noscript=1"
+        alt=""
+      />
+    </noscript>
+    <!-- End Meta Pixel Code - noscript -->
+    <div id="root"></div>
+
+    <!-- Formulário estático para o Netlify Forms detectar o quiz durante o build. -->
+    <form name="prato-10x-quiz" method="POST" data-netlify="true" hidden>
+      <input type="hidden" name="form-name" value="prato-10x-quiz" />
+      <input type="hidden" name="q1" />
+      <input type="hidden" name="q2" />
+      <input type="hidden" name="q3" />
+      <input type="hidden" name="q4" />
+      <input type="hidden" name="score" />
+      <input type="hidden" name="utm_source" />
+      <input type="hidden" name="utm_medium" />
+      <input type="hidden" name="utm_campaign" />
+      <input type="hidden" name="utm_content" />
+      <input type="hidden" name="utm_term" />
+      <input type="hidden" name="utm_id" />
+      <input type="hidden" name="internal_test" />
+      <input type="hidden" name="journey_id" />
+      <input type="hidden" name="page_version" />
+      <input type="hidden" name="timestamp" />
+    </form>
+
+    <script type="module" src="/main.tsx"></script>
+  </body>
+</html>
