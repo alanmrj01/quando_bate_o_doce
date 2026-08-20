@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Quando Bate o Doce">
+  <rect width="64" height="64" rx="18" fill="#512d26"/>
+  <path d="M18 23c0-5 4-9 9-9 3 0 6 2 8 4 2-2 5-4 8-4 5 0 9 4 9 9 0 11-17 23-17 23S18 34 18 23Z" fill="#d7837c"/>
+  <path d="M23 48h24" stroke="#f8f0e2" stroke-width="4" stroke-linecap="round"/>
+</svg>
+

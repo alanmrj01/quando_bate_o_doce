@@ -1,66 +1,28 @@
-# Prato 10x — Landing Page v2.3 Tracking Safe
+# Quando Bate o Doce
 
-Landing page React + Vite + TypeScript, preparada para StackBlitz e deploy na Netlify.
+Landing page React + Vite + TypeScript para o guia situacional de consulta **Quando Bate o Doce**.
 
-## Rodar localmente / StackBlitz
+## Desenvolvimento
 
 ```bash
 npm install
 npm run dev
 ```
 
-## Build de produção
+## Validação
 
 ```bash
+npm run typecheck
 npm run build
 ```
 
-Saída: `dist/`
+A saída de produção é gerada em `dist/` e está preparada para publicação na Netlify.
 
-## Tracking comercial
+## Checkout
 
-- GTM: `GTM-KSGSGL26`
-- Meta Pixel de produção: `2073559566628743`
-- Checkout comercial Kiwify: `https://pay.kiwify.com.br/qpiXBDM`
-- O `InitiateCheckout` NÃO é disparado manualmente na landing. A Kiwify é a fonte do evento quando o checkout realmente abre.
-- UTMs, `fbclid`, `_fbp`/`fbp`, `_fbc`/`fbc`, `src`, placement e IDs de campanha/anúncio são preservados em `sessionStorage` e repassados ao checkout quando disponíveis.
-- Cada sessão recebe um `journey_id` anônimo, enviado à Kiwify em `s1`.
+Defina `VITE_CHECKOUT_URL` com a URL comercial real quando ela estiver disponível. Sem essa variável, os CTAs mostram a mensagem segura “Checkout ainda não configurado.”
 
-## Modo de teste — SEM contaminar o Meta de produção
+## Tracking
 
-Abra a mesma landing acrescentando:
+A página preserva em `sessionStorage` parâmetros de atribuição disponíveis e reconhece `?internal_test=1`. Nenhum Pixel, GTM, GA4 ou emissor externo é incluído por padrão.
 
-```text
-?internal_test=1
-```
-
-Exemplo:
-
-```text
-https://SEU-DOMINIO/?internal_test=1
-```
-
-Nesse modo:
-
-1. o bootstrap cria `internal_test=1` no `dataLayer` antes do GTM;
-2. o `fbq` é neutralizado antes do GTM e o Meta Pixel hardcoded não é inicializado;
-3. eventos da landing continuam disponíveis no `dataLayer` com `debug_mode=true`;
-4. CTAs usam exclusivamente o checkout de teste `https://pay.kiwify.com.br/4B5VArF`;
-5. o checkout recebe `src=internal_test`;
-6. respostas do quiz não são enviadas ao Netlify Forms comercial;
-7. uma faixa roxa deixa claro que a sessão está em QA.
-
-O modo teste NÃO é persistente: sem `?internal_test=1`, a página funciona em produção normalmente. Isso reduz o risco de esquecer o navegador preso em modo QA.
-
-## Atenção ao GTM
-
-O código neutraliza snippets Meta padrão via `fbq` durante `internal_test=1` e publica `internal_test` no `dataLayer`. Se futuramente for criada qualquer nova tag Meta/CAPI dentro do GTM, mantenha também uma exceção de disparo para `internal_test = 1`. Não criar uma segunda origem de `PageView`, `InitiateCheckout` ou `Purchase`.
-
-## Esta versão preserva
-
-- hero, copy, quiz, oferta e layout existentes;
-- Netlify Forms em produção;
-- GTM e GA4 em produção;
-- Meta Pixel de produção para visitantes reais;
-- passagem de atribuição até o checkout;
-- checkout comercial inalterado para tráfego real.

@@ -2,11 +2,7 @@
   "compilerOptions": {
     "target": "ES2022",
     "useDefineForClassFields": true,
-    "lib": [
-      "ES2022",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -23,14 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": [
-    "main.tsx",
-    "App.tsx",
-    "Brand.tsx",
-    "Icons.tsx",
-    "Quiz.tsx",
-    "config.ts",
-    "analytics.ts",
-    "useReveal.ts"
-  ]
+  "include": ["src"]
 }
+
