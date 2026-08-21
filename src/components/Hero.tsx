@@ -43,10 +43,10 @@ export function Hero() {
         <h1><span className="hero-headline-emphasis">Talvez o melhor</span> momento para decidir o que fazer quando bate a vontade de comer doce seja antes dela aparecer</h1>
         <div className="hero-sweet-visual">
           <img
-            src="/hero-chocolate-editorial.png"
+            src="/hero-chocolate-editorial.webp"
             alt="Trufa de chocolate aberta ao lado de pedaços de chocolate escuro"
-            width="960"
-            height="640"
+            width="720"
+            height="480"
             loading="eager"
             decoding="async"
           />

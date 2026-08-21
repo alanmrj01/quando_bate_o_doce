@@ -13,7 +13,7 @@ declare global {
   interface Window {
     __qbdTrackingInitialized?: boolean
     _fbq?: Fbq
-    dataLayer?: unknown[][]
+    dataLayer?: unknown[]
     fbq?: Fbq
     gtag?: (...args: unknown[]) => void
   }
@@ -59,7 +59,11 @@ function initializeMetaPixel(): void {
 
 function initializeGa4(): void {
   window.dataLayer = window.dataLayer ?? []
-  window.gtag = window.gtag ?? ((...args: unknown[]) => window.dataLayer?.push(args))
+  window.gtag =
+    window.gtag ??
+    function gtag() {
+      window.dataLayer?.push(arguments)
+    }
 
   loadExternalScript(
     'qbd-ga4',
