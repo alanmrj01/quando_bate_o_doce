@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { AudienceFit } from './components/AudienceFit'
 import { AudienceNotFit } from './components/AudienceNotFit'
 import { BaseIngredients } from './components/BaseIngredients'
@@ -17,30 +17,20 @@ import { SearchObjection } from './components/SearchObjection'
 import { SituationNavigator } from './components/SituationNavigator'
 import { SituationsGrid } from './components/SituationsGrid'
 import { useReveal } from './hooks/useReveal'
-import { initializeCommerceContext, isInternalTest } from './lib/commerce'
 import { initializeTracking } from './lib/tracking'
 
 export default function App() {
-  const [internalTest, setInternalTest] = useState(false)
   useReveal()
 
   useEffect(() => {
-    initializeCommerceContext()
-    setInternalTest(isInternalTest())
     initializeTracking()
   }, [])
 
   return (
     <div className="site-shell">
-      {internalTest && (
-        <div className="internal-test-banner" role="status">
-          Sessão interna de QA — nenhum tracking comercial está configurado
-        </div>
-      )}
-
       <header className="topbar" aria-label="Cabeçalho">
         <a className="wordmark" href="#inicio" aria-label="Quando Bate o Doce — início">
-          <span aria-hidden="true" />
+          <span className="apple-mark" aria-hidden="true" />
           <b>QUANDO BATE<br />O DOCE</b>
         </a>
         <a className="topbar-link" href="#produto">ver o guia <span aria-hidden="true">↓</span></a>

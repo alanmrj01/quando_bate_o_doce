@@ -1,81 +1,107 @@
-import { useEffect, useRef } from 'react'
 import { siteConfig } from '../config'
 import { CheckoutButton } from './CheckoutButton'
-import { GuideMockup } from './GuideMockup'
+import { HeroGuideMockup, SituationGuideMockup } from './TopGuideMockups'
+
+const benefits = [
+  {
+    label: '37 situações organizadas',
+    icon: (
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M8 6h16v20H8zM12 11h8M12 16h8M12 21h5" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Consulta rápida no celular',
+    icon: (
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="9" y="4" width="14" height="24" rx="4" />
+        <path d="M13 8h6M14 24h4" />
+      </svg>
+    ),
+  },
+  {
+    label: 'Sem começar outra busca toda vez',
+    icon: (
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="14" cy="14" r="8" />
+        <path d="m20 20 6 6M7 25 25 7" />
+      </svg>
+    ),
+  },
+] as const
 
 export function Hero() {
-  const visualRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const visual = visualRef.current
-    if (!visual) return
-
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const coarsePointer = window.matchMedia('(pointer: coarse)')
-    if (reduceMotion.matches || coarsePointer.matches) return
-
-    function handlePointerMove(event: PointerEvent) {
-      if (!visual) return
-      const bounds = visual.getBoundingClientRect()
-      const x = (event.clientX - bounds.left) / bounds.width - 0.5
-      const y = (event.clientY - bounds.top) / bounds.height - 0.5
-      visual.style.setProperty('--parallax-x', `${x * 8}px`)
-      visual.style.setProperty('--parallax-y', `${y * 7}px`)
-    }
-
-    function resetParallax() {
-      visual?.style.setProperty('--parallax-x', '0px')
-      visual?.style.setProperty('--parallax-y', '0px')
-    }
-
-    visual.addEventListener('pointermove', handlePointerMove)
-    visual.addEventListener('pointerleave', resetParallax)
-    return () => {
-      visual.removeEventListener('pointermove', handlePointerMove)
-      visual.removeEventListener('pointerleave', resetParallax)
-    }
-  }, [])
-
   return (
-    <section className="hero section-shell" id="inicio">
-      <div className="hero-copy" data-reveal>
-        <div className="eyebrow"><span /> Guia situacional de consulta</div>
-        <h1><span className="hero-headline-emphasis">Talvez o melhor</span> momento para decidir o que fazer quando bate a vontade de comer doce seja antes dela aparecer</h1>
-        <div className="hero-sweet-visual">
-          <img
-            src="/hero-chocolate-editorial.webp"
-            alt="Trufa de chocolate aberta ao lado de pedaços de chocolate escuro"
-            width="720"
-            height="480"
-            loading="eager"
-            decoding="async"
-          />
+    <section className="hero hero-editorial section-shell" id="inicio">
+      <div className="hero-first-fold">
+        <div className="hero-intro" data-reveal>
+          <span className="hero-preheadline">CHEGA DE FUGIR DA DIETA</span>
+          <h1>
+            Quando bate a <span className="hero-accent hero-accent--short">vontade</span> de doce, você tem um{' '}
+            <span className="hero-accent hero-accent--long">guia de opções fit</span> para aquele momento.
+          </h1>
         </div>
-        <p className="hero-subheadline">
-          O Quando Bate o Doce organiza 37 situações reais para você consultar quando a vontade aparece — depois do almoço, no fim da tarde, à noite, quando quer chocolate ou quando tem poucos minutos para decidir.
-        </p>
 
-        <div className="hero-offer" aria-label={`${siteConfig.price}, ${siteConfig.paymentLabel}`}>
-          <div className="price-lockup">
-            <span>acesso completo</span>
+        <div className="hero-product-stage" data-reveal>
+          <span className="editorial-note editorial-note--save">salve no celular</span>
+          <HeroGuideMockup />
+        </div>
+
+        <p className="hero-editorial-subheadline" data-reveal>
+          37 situações do dia com opções de <strong>doces proteicos e fit</strong> organizadas para você consultar no celular sem precisar começar outra busca toda vez.
+        </p>
+      </div>
+
+      <div className="hero-commerce" aria-label={`${siteConfig.price}, ${siteConfig.paymentLabel}`} data-reveal>
+        <div className="hero-commerce__price">
+          <span>ACESSO COMPLETO</span>
+          <div>
             <strong>{siteConfig.price}</strong>
             <small>{siteConfig.paymentLabel}</small>
-            <em>37 situações organizadas por menos de R$1 cada</em>
           </div>
-          <CheckoutButton label="Quero ter essa experiência no meu celular" source="hero" />
+          <em>37 situações organizadas por menos de R$1 cada</em>
         </div>
-
-        <div className="hero-proof" aria-label="Características do produto">
-          <span>37 situações organizadas</span>
-          <span>Consulta rápida no celular</span>
-          <span>Sem começar outra busca toda vez</span>
+        <div className="hero-commerce__action">
+          <CheckoutButton label="Quero ter esse guia no celular" source="hero" />
+          <p>
+            <span>Acesso imediato</span>
+            <i aria-hidden="true">•</i>
+            <span>100% digital</span>
+            <i aria-hidden="true">•</i>
+            <span>Seguro</span>
+          </p>
         </div>
       </div>
 
-      <div className="hero-visual" ref={visualRef} data-reveal>
-        <p className="visual-note visual-note--top">salve no celular</p>
-        <GuideMockup />
-        <p className="visual-note visual-note--bottom">abra pela situação</p>
+      <div className="hero-second-fold">
+        <div className="hero-benefits" aria-label="Características do guia" data-reveal>
+          {benefits.map(({ label, icon }) => (
+            <span className="hero-benefit" key={label}>
+              <i>{icon}</i>
+              <b>{label}</b>
+            </span>
+          ))}
+        </div>
+
+        <article className="situation-guide-card" data-reveal>
+          <div className="situation-guide-card__copy">
+            <span className="situation-guide-card__label">GUIA SITUACIONAL DE CONSULTA</span>
+            <h2>
+              Você <span>abre pela situação</span> e encontra opções fit para aquele momento.
+            </h2>
+            <p>
+              Em vez de procurar do zero, o guia organiza doces proteicos e opções fit para situações reais do dia — como depois do almoço, no fim da tarde, à noite ou quando bate vontade de chocolate.
+            </p>
+            <span className="editorial-note editorial-note--open">abra pela situação</span>
+          </div>
+
+          <div className="situation-guide-card__visual">
+            <span className="editorial-note editorial-note--choose">escolha a situação</span>
+            <SituationGuideMockup />
+            <span className="editorial-note editorial-note--fit">opções fit e proteicas</span>
+          </div>
+        </article>
       </div>
     </section>
   )
