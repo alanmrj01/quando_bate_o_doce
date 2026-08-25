@@ -1,8 +1,32 @@
 export const quizQuestions = [
-  'Depois de algumas refeições, você ainda sente vontade de comer alguma coisa doce?',
-  'Quando bate vontade de doce, você costuma decidir o que comer só na hora?',
-  'Você costuma procurar opções só depois que a vontade já apareceu?',
-  'Ter um guia no celular com opções já filtradas para cada situação facilitaria sua escolha?',
+  {
+    question: 'Quando bate vontade de doce, você já ficou entre comer o que queria e sentir que estava saindo da dieta?',
+    options: [
+      { label: 'Sim, acontece comigo', value: 'sim' },
+      { label: 'Não muito', value: 'nao' },
+    ],
+  },
+  {
+    question: 'Depois do almoço, no fim da tarde ou à noite, a vontade de doce costuma aparecer mesmo quando você quer manter sua alimentação?',
+    options: [
+      { label: 'Sim', value: 'sim' },
+      { label: 'Raramente', value: 'nao' },
+    ],
+  },
+  {
+    question: 'Quando procura uma opção fit, você acaba abrindo várias receitas ou produtos antes de decidir?',
+    options: [
+      { label: 'Sim, quase sempre', value: 'sim' },
+      { label: 'Não costumo', value: 'nao' },
+    ],
+  },
+  {
+    question: 'Ter opções fit e proteicas já organizadas para cada um desses momentos deixaria essa decisão mais simples?',
+    options: [
+      { label: 'Sim, faria sentido', value: 'sim' },
+      { label: 'Não para mim', value: 'nao' },
+    ],
+  },
 ] as const
 
 export const situations = [
@@ -38,25 +62,26 @@ export const deliverables = [
   ['02', '37 situações organizadas'],
   ['03', 'Mapa “O que está acontecendo agora?”'],
   ['04', 'Índice clicável para consulta rápida'],
-  ['05', 'Doce em 5'],
-  ['06', 'Seção especial para chocolate'],
-  ['07', 'Lista-base de ingredientes'],
+  ['05', 'Opções fit e proteicas por situação'],
+  ['06', 'Categorias low carb, sem açúcar e chocolate zero'],
+  ['07', 'Receitas saudáveis e alternativas rápidas'],
   ['08', 'Página “não quero cozinhar”'],
 ] as const
 
 export const audienceFit = [
-  'depois do almoço procura alguma coisa doce;',
-  'no fim da tarde a vontade costuma aparecer;',
-  'à noite acaba beliscando;',
+  'depois do almoço procura algo doce sem querer sair da alimentação que planejou;',
+  'no fim da tarde a vontade aparece e você procura uma opção fit;',
+  'à noite quer uma alternativa doce que faça sentido para esse momento;',
   'chocolate aparece com frequência na cabeça;',
-  'salva receitas mas não lembra delas quando precisa;',
-  'pesquisa opções apenas quando a vontade já apareceu;',
-  'quer alternativas simples em vez de um plano rígido.',
+  'salva receitas fit, mas não lembra delas quando precisa;',
+  'pesquisa opções proteicas apenas quando a vontade já apareceu;',
+  'quer alternativas organizadas em vez de começar outra busca toda vez.',
 ] as const
 
 export const audienceNotFit = [
-  'Não é dieta.',
+  'Não é um plano alimentar.',
   'Não é prescrição nutricional.',
+  'Não promete emagrecimento ou resultado corporal.',
   'Não promete eliminar vontade de doce.',
   'Não substitui nutricionista ou acompanhamento profissional.',
   'Não exige abandonar sobremesas.',
@@ -66,12 +91,12 @@ export const faqItems = [
   {
     question: 'É um livro de receitas?',
     answer:
-      'Não. Preparações fazem parte do material, mas ele é organizado por situações, não como uma coleção tradicional de receitas.',
+      'Não. Receitas e opções fit fazem parte do material, mas tudo é organizado por situações — não como uma coleção genérica de sobremesas.',
   },
   {
     question: 'São realmente 37 situações?',
     answer:
-      'Sim. O guia organiza 37 situações diferentes relacionadas aos momentos em que a vontade de doce pode aparecer.',
+      'Sim. O guia organiza 37 situações relacionadas aos momentos em que a vontade de doce aparece e reúne opções fit e proteicas adequadas a cada contexto.',
   },
   {
     question: 'Preciso seguir alguma ordem?',
@@ -89,7 +114,7 @@ export const faqItems = [
   {
     question: 'Preciso comprar ingredientes especiais?',
     answer:
-      'A proposta é trabalhar com alternativas simples e possibilidades compatíveis com uma rotina comum.',
+      'A proposta é reunir alternativas fit, proteicas e simples, incluindo possibilidades compatíveis com ingredientes e produtos de uma rotina comum.',
   },
   {
     question: 'O acesso é imediato?',

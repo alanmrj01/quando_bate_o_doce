@@ -14,6 +14,7 @@ import { ProductPreview } from './components/ProductPreview'
 import { QuickTimeSection } from './components/QuickTimeSection'
 import { Quiz } from './components/Quiz'
 import { SearchObjection } from './components/SearchObjection'
+import { SectionCheckoutCta } from './components/SectionCheckoutCta'
 import { SituationNavigator } from './components/SituationNavigator'
 import { SituationsGrid } from './components/SituationsGrid'
 import { useReveal } from './hooks/useReveal'
@@ -41,14 +42,18 @@ export default function App() {
         <Quiz />
         <PremiseSection />
         <SituationNavigator />
+        <SectionCheckoutCta label="Quero ter minhas opções organizadas" source="after-how-it-works" />
         <ProductPreview />
         <SearchObjection />
         <ProductLogic />
+        <SectionCheckoutCta label="Quero acessar as 37 situações" source="after-product-demo" />
         <SituationsGrid />
         <QuickTimeSection />
         <ChocolateSection />
+        <SectionCheckoutCta label="Quero ter esse guia no celular" source="after-situations" />
         <Deliverables />
         <BaseIngredients />
+        <SectionCheckoutCta label="Quero o Quando Bate o Doce" source="after-ingredients" />
         <AudienceFit />
         <AudienceNotFit />
         <OfferBand />

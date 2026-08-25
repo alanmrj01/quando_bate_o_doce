@@ -21,7 +21,7 @@ export function ChocolateSection() {
       <div className="chocolate-copy">
         <span className="section-index section-index--light">09 / vontade específica</span>
         <h2>Porque às vezes “coma uma fruta” simplesmente não responde ao que você está querendo</h2>
-        <p>O guia não tenta fingir que toda vontade é igual. Se a vontade é de chocolate, a consulta começa reconhecendo isso.</p>
+        <p>O guia não tenta fingir que toda vontade é igual. Se a vontade é de chocolate, a consulta começa por ela e organiza alternativas como chocolate zero açúcar, opções proteicas e preparações fit.</p>
         <div className="chocolate-modes">
           {chocolateModes.map(([mode, note]) => (
             <article key={mode}>
@@ -35,4 +35,3 @@ export function ChocolateSection() {
     </section>
   )
 }
-

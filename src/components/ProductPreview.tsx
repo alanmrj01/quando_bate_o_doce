@@ -11,7 +11,7 @@ export function ProductPreview() {
       <div className="section-heading section-heading--split">
         <div>
           <span className="section-index">04 / por dentro do guia</span>
-          <h2>Um guia para abrir quando a vontade aparece — não para deixar esquecido numa pasta.</h2>
+          <h2>Um guia para abrir quando a vontade aparece e encontrar opções fit organizadas pelo momento.</h2>
         </div>
         <p>Páginas simuladas a partir da estrutura real do produto. O conteúdo completo permanece dentro do guia.</p>
       </div>
@@ -29,7 +29,7 @@ export function ProductPreview() {
             <div className="page-context">
               <span>A situação</span>
               <span>O que importa neste momento</span>
-              <span>Opções já filtradas</span>
+              <span>Opções fit e proteicas já filtradas</span>
             </div>
             <footer>QUANDO BATE O DOCE</footer>
           </article>

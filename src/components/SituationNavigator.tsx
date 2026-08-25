@@ -35,7 +35,7 @@ export function SituationNavigator() {
         <div className="navigator-result" aria-live="polite">
           <span className="result-kicker">situação selecionada</span>
           <h3>{selected}</h3>
-          <p>O guia abre o contexto correspondente e organiza os caminhos que fazem sentido para esse momento.</p>
+          <p>O guia abre o contexto correspondente e organiza opções fit e proteicas que fazem sentido para esse momento.</p>
           <ol className="mechanism-flow" aria-label="Fluxo de consulta">
             <li><span>01</span><b>Situação</b></li>
             <li><span>02</span><b>Contexto</b></li>
@@ -47,4 +47,3 @@ export function SituationNavigator() {
     </section>
   )
 }
-

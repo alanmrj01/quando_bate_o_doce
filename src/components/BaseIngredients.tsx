@@ -11,9 +11,9 @@ export function BaseIngredients() {
       <div className="section-heading section-heading--split">
         <div>
           <span className="section-index">11 / lista-base</span>
-          <h2>Algumas decisões ficam mais fáceis quando algumas opções já estão em casa</h2>
+          <h2>Algumas escolhas fit ficam mais fáceis quando as opções certas já estão em casa</h2>
         </div>
-        <p>Uma referência organizacional, sem prescrição nutricional e sem transformar a cozinha em uma lista rígida.</p>
+        <p>Uma referência prática para visualizar possibilidades fit e proteicas, sem prescrição nutricional ou lista rígida.</p>
       </div>
 
       <div className="pantry-board">
@@ -31,4 +31,3 @@ export function BaseIngredients() {
     </section>
   )
 }
-

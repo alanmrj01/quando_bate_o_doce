@@ -220,6 +220,7 @@ function setupLandingEngagement(mode: QbdMode): void {
   let maxScrollProgress = getScrollProgress()
   let timer: number | undefined
   let cleanedUp = false
+  let visibleTimeEvaluationLogged = false
 
   function getVisibleTime(now = Date.now()): number {
     if (visibleSince === undefined) return accumulatedVisibleTime
@@ -229,6 +230,17 @@ function setupLandingEngagement(mode: QbdMode): void {
   function clearTimer(): void {
     if (timer !== undefined) window.clearTimeout(timer)
     timer = undefined
+  }
+
+  function logQaEngagementState(): void {
+    if (mode !== 'qa') return
+
+    const visibleTime = getVisibleTime()
+    const eligible = visibleTime >= requiredVisibleTime && maxScrollProgress >= 0.25
+    console.info(`[QBD QA][engagement] visible_ms=${Math.round(visibleTime)}`)
+    console.info(`[QBD QA][engagement] max_scroll=${Math.round(maxScrollProgress * 100)}%`)
+    console.info(`[QBD QA][engagement] visibility=${document.visibilityState}`)
+    console.info(`[QBD QA][engagement] eligible=${eligible}`)
   }
 
   function cleanup(): void {
@@ -254,9 +266,14 @@ function setupLandingEngagement(mode: QbdMode): void {
 
   function evaluate(): void {
     maxScrollProgress = Math.max(maxScrollProgress, getScrollProgress())
-    if (getVisibleTime() < requiredVisibleTime) {
+    const visibleTime = getVisibleTime()
+    if (visibleTime < requiredVisibleTime) {
       scheduleVisibleTimeCheck()
       return
+    }
+    if (!visibleTimeEvaluationLogged) {
+      visibleTimeEvaluationLogged = true
+      logQaEngagementState()
     }
     if (maxScrollProgress < 0.25) return
 
@@ -267,11 +284,17 @@ function setupLandingEngagement(mode: QbdMode): void {
         landing_version: siteConfig.analytics.landingVersion,
       })
       logQaEvent(mode, 'landing_engaged')
+      if (mode === 'qa') console.info('[QBD QA][engagement] fired')
     })
     if (tracked) cleanup()
   }
 
   function handleScroll(): void {
+    const previousScrollProgress = maxScrollProgress
+    maxScrollProgress = Math.max(maxScrollProgress, getScrollProgress())
+    if (previousScrollProgress < 0.25 && maxScrollProgress >= 0.25) {
+      logQaEngagementState()
+    }
     evaluate()
   }
 
@@ -279,6 +302,7 @@ function setupLandingEngagement(mode: QbdMode): void {
     const now = Date.now()
     if (document.visibilityState === 'visible') {
       if (visibleSince === undefined) visibleSince = now
+      logQaEngagementState()
       evaluate()
       return
     }
@@ -288,6 +312,7 @@ function setupLandingEngagement(mode: QbdMode): void {
       visibleSince = undefined
     }
     clearTimer()
+    logQaEngagementState()
   }
 
   scheduleVisibleTimeCheck()
@@ -493,6 +518,36 @@ export function trackCtaView(ctaPosition: string): void {
       landing_version: siteConfig.analytics.landingVersion,
     })
     logQaEvent(runtime.mode, 'cta_view')
+  })
+}
+
+export function trackQuizStart(): void {
+  const runtime = window.__qbdTrackingState
+  if (!runtime) return
+
+  queueOrTrackGa4Once('ga4:quiz_start', () => {
+    const journeyId = getAnalyticsAttribution().journey_id
+    window.gtag?.('event', 'quiz_start', {
+      product_id: siteConfig.analytics.productId,
+      landing_version: siteConfig.analytics.landingVersion,
+      ...(journeyId ? { journey_id: journeyId } : {}),
+    })
+    logQaEvent(runtime.mode, 'quiz_start')
+  })
+}
+
+export function trackQuizComplete(): void {
+  const runtime = window.__qbdTrackingState
+  if (!runtime) return
+
+  queueOrTrackGa4Once('ga4:quiz_complete', () => {
+    const journeyId = getAnalyticsAttribution().journey_id
+    window.gtag?.('event', 'quiz_complete', {
+      product_id: siteConfig.analytics.productId,
+      landing_version: siteConfig.analytics.landingVersion,
+      ...(journeyId ? { journey_id: journeyId } : {}),
+    })
+    logQaEvent(runtime.mode, 'quiz_complete')
   })
 }
 

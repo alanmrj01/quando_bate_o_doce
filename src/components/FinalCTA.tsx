@@ -8,8 +8,8 @@ export function FinalCTA() {
       <span className="final-orbit final-orbit--two" aria-hidden="true" />
       <div className="final-cta__content">
         <span className="section-index section-index--light">16 / pronto para consultar</span>
-        <h2>Na próxima vez que bater vontade de doce, você pode começar pela opção — não pela pesquisa.</h2>
-        <p>Tenha o Quando Bate o Doce salvo no celular e consulte uma das 37 situações sempre que precisar.</p>
+        <h2>Na próxima vez que bater vontade de doce, você pode começar pela situação — e encontrar opções fit já organizadas.</h2>
+        <p>Tenha o Quando Bate o Doce salvo no celular e consulte opções fit e proteicas em uma das 37 situações sempre que precisar.</p>
         <div className="final-offer">
           <div>
             <strong>{siteConfig.price}</strong>
@@ -21,4 +21,3 @@ export function FinalCTA() {
     </section>
   )
 }
-

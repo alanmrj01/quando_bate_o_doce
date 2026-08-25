@@ -44,7 +44,6 @@ export function Hero() {
         </div>
 
         <div className="hero-product-stage" data-reveal>
-          <span className="editorial-note editorial-note--save">salve no celular</span>
           <HeroGuideMockup />
         </div>
 
@@ -97,7 +96,7 @@ export function Hero() {
           </div>
 
           <div className="situation-guide-card__visual">
-            <span className="editorial-note editorial-note--choose">escolha a situação</span>
+            <span className="editorial-note editorial-note--save">salve no celular</span>
             <SituationGuideMockup />
             <span className="editorial-note editorial-note--fit">opções fit e proteicas</span>
           </div>

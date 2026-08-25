@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { quizQuestions } from '../content'
+import { trackQuizComplete, trackQuizStart } from '../lib/tracking'
 import { CheckoutButton } from './CheckoutButton'
 
 type QuizAnswer = 'sim' | 'nao'
@@ -10,9 +11,15 @@ export function Quiz() {
   const currentIndex = Math.min(answers.length, quizQuestions.length - 1)
   const visibleStep = completed ? quizQuestions.length : currentIndex + 1
   const progress = visibleStep / quizQuestions.length
+  const currentQuestion = quizQuestions[currentIndex]
+
+  useEffect(() => {
+    if (completed) trackQuizComplete()
+  }, [completed])
 
   function answer(value: QuizAnswer) {
     if (completed) return
+    if (answers.length === 0) trackQuizStart()
     setAnswers((current) => [...current, value])
   }
 
@@ -46,19 +53,22 @@ export function Quiz() {
         {!completed ? (
           <div className="quiz-stage" key={currentIndex}>
             <span className="quiz-number">0{visibleStep}</span>
-            <p>{quizQuestions[currentIndex]}</p>
+            <p>{currentQuestion.question}</p>
             <div className="quiz-actions" aria-label="Opções de resposta">
-              <button type="button" onClick={() => answer('sim')}>Sim</button>
-              <button type="button" onClick={() => answer('nao')}>Não</button>
+              {currentQuestion.options.map((option) => (
+                <button type="button" onClick={() => answer(option.value)} key={option.value}>
+                  {option.label}
+                </button>
+              ))}
             </div>
           </div>
         ) : (
           <div className="quiz-result" aria-live="polite">
             <span className="result-mark" aria-hidden="true">✓</span>
             <div>
-              <h3>O Quando Bate o Doce foi pensado exatamente para situações como essas.</h3>
-              <p>Independentemente das respostas, você chegou ao fim sem receber um diagnóstico inventado.</p>
-              <CheckoutButton label="Quero ter minhas opções prontas" source="quiz-result" />
+              <h3>É justamente para esses momentos que o Quando Bate o Doce organiza 37 situações.</h3>
+              <p>Você abre no celular e encontra opções fit e proteicas já organizadas para o momento que está vivendo.</p>
+              <CheckoutButton label="Quero ter minhas opções organizadas" source="quiz-result" />
               <button className="text-button" type="button" onClick={restart}>Refazer perguntas</button>
             </div>
           </div>

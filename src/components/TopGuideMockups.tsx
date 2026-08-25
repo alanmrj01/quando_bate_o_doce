@@ -79,7 +79,15 @@ export function HeroGuideMockup() {
   return (
     <div className="top-phone-scene" role="img" aria-label="Guia Quando Bate o Doce aberto no celular sobre uma composição de chocolate">
       <div className="top-phone-scene__chocolate" aria-hidden="true">
-        <img src="/hero-chocolate-editorial.webp" alt="" width="720" height="480" loading="eager" decoding="async" />
+        <img
+          src="/hero-chocolate-splash-v1.webp"
+          alt=""
+          width="1254"
+          height="1254"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
       </div>
 
       <div className="top-phone top-phone--home">

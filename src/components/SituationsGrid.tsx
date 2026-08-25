@@ -6,9 +6,9 @@ export function SituationsGrid() {
       <div className="section-heading section-heading--split">
         <div>
           <span className="section-index">07 / repertório organizado</span>
-          <h2>37 momentos em que você não precisa mais começar do zero</h2>
+          <h2>37 situações para encontrar opções fit sem precisar começar do zero</h2>
         </div>
-        <p>As situações se cruzam por momento, textura, tempo disponível e realidade da cozinha.</p>
+        <p>Dentro de cada situação, as opções se organizam por tipo de doce, tempo disponível e realidade da cozinha.</p>
       </div>
 
       <div className="situation-map">
@@ -26,4 +26,3 @@ export function SituationsGrid() {
     </section>
   )
 }
-
