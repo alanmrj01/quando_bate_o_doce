@@ -3269,11 +3269,8 @@ svg {
 .fit-category__icon svg {
   width: 29px;
   height: 29px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
+  overflow: visible;
+  filter: drop-shadow(0 2px 2px rgba(70, 37, 29, 0.12));
 }
 
 .fit-category b {
@@ -4225,6 +4222,87 @@ svg {
 
   .situation-phone {
     width: 230px;
+  }
+}
+
+/* Quatro correções visuais pontuais: marca, título do mockup, chocolate e mini-ilustrações. */
+.apple-mark,
+.topbar .wordmark > .apple-mark,
+.apple-mark--phone {
+  border-radius: 0;
+  background: url("/qbd-apple-mark-v2.svg") center / contain no-repeat;
+  box-shadow: none;
+  transform: none;
+}
+
+.apple-mark::before,
+.apple-mark::after {
+  display: none;
+}
+
+.topbar .wordmark > .apple-mark {
+  width: 36px;
+  height: 36px;
+}
+
+.apple-mark--phone {
+  width: 17px;
+  height: 17px;
+}
+
+.top-phone__screen > p {
+  max-width: none;
+  width: 100%;
+  margin-inline: auto;
+  line-height: 0.94;
+  text-wrap: nowrap;
+}
+
+.top-phone__screen > p span {
+  display: block;
+}
+
+.fit-category__icon {
+  background: linear-gradient(145deg, #fffaf1, #f4e2d2);
+}
+
+.fit-category__icon--low-carb,
+.fit-category__icon--saudaveis {
+  background: linear-gradient(145deg, #fffaf1, #e8edd9);
+}
+
+.fit-category__icon--brigadeiro,
+.fit-category__icon--chocolate-zero {
+  background: linear-gradient(145deg, #fff8ee, #ead5c5);
+}
+
+.fit-category__icon--proteicas {
+  background: linear-gradient(145deg, #fffaf2, #f3dce2);
+}
+
+.fit-category__icon svg {
+  width: 35px;
+  height: 35px;
+}
+
+@media (max-width: 599px) {
+  .top-phone-scene__chocolate {
+    width: calc(100% + 44px);
+    height: calc(100% + 186px);
+    left: -22px;
+    top: -8px;
+  }
+
+  .top-phone-scene__chocolate::after {
+    background:
+      linear-gradient(180deg, rgba(251, 243, 231, 0.32), transparent 22%),
+      linear-gradient(90deg, rgba(251, 243, 231, 0.08), transparent 36%);
+  }
+
+  .top-phone-scene__chocolate img {
+    object-position: 94% 69%;
+    transform: scale(1.12);
+    transform-origin: 72% 68%;
   }
 }
 
