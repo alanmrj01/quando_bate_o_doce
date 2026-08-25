@@ -3959,6 +3959,275 @@ svg {
   }
 }
 
+/* Consolidação visual cirúrgica: densidade da primeira e segunda dobra. */
+.hero.hero-editorial {
+  padding-block: 20px 68px;
+}
+
+.topbar {
+  min-height: 78px;
+}
+
+.hero-editorial h1 {
+  max-width: 17ch;
+  font-size: clamp(1.98rem, 8.8vw, 2.46rem);
+}
+
+.hero-product-stage {
+  margin-top: 0;
+}
+
+.top-phone-scene {
+  height: clamp(510px, 136vw, 535px);
+  overflow: visible;
+}
+
+.top-phone-scene__chocolate {
+  width: 100%;
+  height: calc(100% + 170px);
+  left: 0;
+  transform: none;
+}
+
+.top-phone-scene__chocolate img {
+  transform: scale(1.32);
+  transform-origin: 64% 67%;
+}
+
+.top-phone {
+  width: clamp(242px, 66.7vw, 260px);
+  top: 8px;
+  right: -3px;
+}
+
+.hero-editorial-subheadline {
+  position: relative;
+  z-index: 4;
+  margin-top: 8px;
+  padding: 10px 8px 10px 0;
+  background: linear-gradient(90deg, rgba(251, 243, 231, 0.98) 0 72%, rgba(251, 243, 231, 0.74) 88%, transparent);
+  font-size: clamp(0.94rem, 3.85vw, 1.08rem);
+  line-height: 1.5;
+}
+
+.hero-commerce {
+  gap: 13px;
+  margin-top: 6px;
+  padding: 18px;
+}
+
+.hero-editorial .hero-commerce .primary-button {
+  min-height: 58px;
+}
+
+.hero-commerce__action > p {
+  margin-top: 6px;
+}
+
+.hero-second-fold {
+  margin-top: 24px;
+}
+
+.hero-benefits {
+  padding-block: 5px;
+}
+
+.hero-benefit {
+  min-height: 70px;
+  padding-block: 8px;
+}
+
+.situation-guide-card {
+  gap: 12px;
+  margin-top: 14px;
+  padding: 22px 16px 4px;
+}
+
+.situation-guide-card h2 {
+  margin-top: 10px;
+  font-size: clamp(1.9rem, 8.6vw, 2.65rem);
+  line-height: 0.98;
+}
+
+.situation-guide-card__copy > p {
+  margin-top: 14px;
+  font-size: 0.86rem;
+  line-height: 1.48;
+}
+
+.editorial-note--open {
+  margin-top: 14px;
+}
+
+.situation-guide-card__visual {
+  min-height: 460px;
+  margin-top: -17px;
+}
+
+.situation-guide-card__visual .editorial-note--save {
+  top: -8px;
+}
+
+.situation-guide-card__visual .editorial-note--fit {
+  bottom: 4px;
+}
+
+.situation-phone {
+  width: min(100%, 236px);
+}
+
+.scene-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.scene-timeline .scene-copy p {
+  margin: 0;
+  color: #705a52;
+  font-size: 0.69rem;
+  line-height: 1.35;
+}
+
+@media (min-width: 600px) {
+  .topbar {
+    min-height: 88px;
+  }
+
+  .top-phone-scene {
+    height: 630px;
+    overflow: clip;
+  }
+
+  .top-phone-scene__chocolate {
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .top-phone {
+    width: 294px;
+    top: 38px;
+    right: 4%;
+  }
+
+  .hero-editorial-subheadline {
+    padding: 0;
+    background: none;
+  }
+
+  .situation-guide-card {
+    padding: 34px 32px 12px;
+  }
+
+  .situation-guide-card__visual {
+    min-height: 545px;
+  }
+
+  .situation-phone {
+    width: 278px;
+  }
+}
+
+@media (min-width: 900px) {
+  .hero.hero-editorial {
+    padding-block: 40px 88px;
+  }
+
+  .hero-first-fold {
+    gap: 8px 42px;
+  }
+
+  .hero-editorial h1 {
+    max-width: 15ch;
+    font-size: clamp(3.25rem, 4.35vw, 4.05rem);
+  }
+
+  .top-phone-scene {
+    height: 610px;
+    overflow: visible;
+  }
+
+  .top-phone-scene__chocolate {
+    width: 145%;
+    height: 96%;
+    left: -43%;
+    top: 2%;
+    transform: none;
+  }
+
+  .top-phone {
+    width: 300px;
+    top: 54px;
+  }
+
+  .hero-commerce {
+    margin-top: -44px;
+  }
+
+  .hero-second-fold {
+    margin-top: 40px;
+  }
+
+  .situation-guide-card {
+    gap: 46px;
+    padding: 48px 52px 18px;
+  }
+
+  .situation-guide-card__visual {
+    min-height: 560px;
+    margin-top: 0;
+  }
+
+  .situation-phone {
+    width: 294px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .top-phone-scene {
+    height: 640px;
+  }
+
+  .top-phone {
+    width: 316px;
+  }
+
+  .hero-commerce {
+    margin-top: -64px;
+  }
+
+  .situation-guide-card {
+    padding-inline: 62px;
+  }
+}
+
+@media (max-width: 359px) {
+  .topbar {
+    min-height: 72px;
+  }
+
+  .hero-editorial h1 {
+    font-size: 1.88rem;
+  }
+
+  .top-phone-scene {
+    height: 490px;
+  }
+
+  .top-phone {
+    width: 236px;
+    top: 8px;
+  }
+
+  .situation-guide-card__visual {
+    min-height: 455px;
+  }
+
+  .situation-phone {
+    width: 230px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

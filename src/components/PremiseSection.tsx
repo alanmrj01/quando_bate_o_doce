@@ -1,8 +1,8 @@
 const scenes = [
-  { time: '12:42', title: 'Acabou o almoço', illustration: 'lunch' },
-  { time: '16:18', title: 'Abriu a geladeira', illustration: 'fridge' },
-  { time: '21:07', title: 'Chegou a noite', illustration: 'night' },
-  { time: 'agora', title: 'Pensou em algo doce', illustration: 'thought' },
+  { time: '12:42', title: 'Acabou o almoço', support: 'Deu vontade de um doce.', illustration: 'lunch' },
+  { time: '16:18', title: 'Abriu a geladeira', support: 'Queria alguma coisa rápida.', illustration: 'fridge' },
+  { time: '21:07', title: 'Chegou a noite', support: 'Bateu vontade de chocolate.', illustration: 'night' },
+  { time: 'agora', title: 'E veio a dúvida', support: 'Isso vai me fazer sair da dieta?', illustration: 'thought' },
 ] as const
 
 type SceneIllustrationProps = {
@@ -66,23 +66,26 @@ export function PremiseSection() {
   return (
     <section className="premise-section section-block" data-reveal>
       <div className="section-heading section-heading--center">
-        <h2>A vontade aparece rápido. A decisão normalmente começa depois.</h2>
+        <h2>A vontade de doce aparece. E junto vem aquela dúvida de sair ou não da dieta.</h2>
       </div>
 
       <div className="scene-timeline">
-        {scenes.map(({ time, title, illustration }) => (
+        {scenes.map(({ time, title, support, illustration }) => (
           <article className={illustration ? 'has-illustration' : ''} key={title}>
             <span>{time}</span>
             {illustration && <SceneIllustration scene={illustration} />}
-            <strong>{title}</strong>
+            <div className="scene-copy">
+              <strong>{title}</strong>
+              <p>{support}</p>
+            </div>
           </article>
         ))}
       </div>
 
       <div className="thought-card">
         <span>pergunta interna</span>
-        <blockquote>“O que eu poderia comer agora?”</blockquote>
-        <p>Começar a procurar depois que a vontade já apareceu transforma uma decisão pequena em mais uma escolha improvisada.</p>
+        <blockquote>“O que eu posso escolher agora?”</blockquote>
+        <p>Quando toda vontade de doce vira uma escolha entre matar a vontade e continuar na dieta, ter opções fit já organizadas deixa a decisão muito mais simples.</p>
       </div>
     </section>
   )
