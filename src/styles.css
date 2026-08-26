@@ -4238,6 +4238,7 @@ svg {
     height: calc(100% + 300px);
     left: 0;
     top: -250px;
+    clip-path: inset(0 0 50px 0);
   }
 
   .top-phone-scene__chocolate::before {
@@ -4262,7 +4263,13 @@ svg {
   }
 
   .top-phone__screen > p {
-    max-width: 12.5ch;
+    max-width: 13ch;
+    font-size: clamp(1.08rem, 4.7vw, 1.24rem);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
   }
 }
 
