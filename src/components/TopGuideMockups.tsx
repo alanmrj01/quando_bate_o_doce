@@ -17,61 +17,25 @@ const fitCategories: Array<{ label: string; kind: CategoryKind }> = [
   { label: 'Receitas saudáveis', kind: 'saudaveis' },
 ]
 
+const categoryIconByKind: Record<CategoryKind, string> = {
+  'low-carb': '/guide-food-icons/low-carb-bowl.png',
+  brigadeiro: '/guide-food-icons/brigadeiro-fit.png',
+  'sem-acucar': '/guide-food-icons/sugar-free-dessert.png',
+  'chocolate-zero': '/guide-food-icons/zero-sugar-chocolate.png',
+  proteicas: '/guide-food-icons/protein-option.png',
+  saudaveis: '/guide-food-icons/healthy-strawberry.png',
+}
+
 function CategoryIcon({ kind }: { kind: CategoryKind }) {
-  if (kind === 'brigadeiro') {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M13 33c1-9 5-15 11-15s10 6 11 15" />
-        <path d="M10 34h28l-3 7H13Z" />
-        <path d="m18 14 2 3m6-5-1 4m7 0-3 2" />
-      </svg>
-    )
-  }
-
-  if (kind === 'sem-acucar') {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="m14 19 10-6 10 6v12l-10 6-10-6Z" />
-        <path d="m14 19 10 6 10-6M24 25v12M10 39 38 9" />
-      </svg>
-    )
-  }
-
-  if (kind === 'chocolate-zero') {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M11 12h26v25H11zM11 24h26M20 12v25M29 12v25" />
-        <circle cx="34" cy="34" r="8" />
-        <path d="m30 38 8-8" />
-      </svg>
-    )
-  }
-
-  if (kind === 'proteicas') {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M17 10h14l3 7-2 22H16l-2-22Z" />
-        <path d="M14 17h20M19 25c3 3 7 3 10 0" />
-        <path d="M21 10V7h6v3" />
-      </svg>
-    )
-  }
-
-  if (kind === 'saudaveis') {
-    return (
-      <svg viewBox="0 0 48 48" aria-hidden="true">
-        <path d="M24 17c-7-5-15 0-15 9 0 8 7 14 15 14s15-6 15-14c0-9-8-14-15-9Z" />
-        <path d="M24 17c0-5 3-8 7-10M25 12c5-3 9-2 11 1-4 3-8 3-11-1Z" />
-      </svg>
-    )
-  }
-
   return (
-    <svg viewBox="0 0 48 48" aria-hidden="true">
-      <path d="M10 29h28c-1 8-6 12-14 12S11 37 10 29Z" />
-      <path d="M14 29c2-7 8-11 18-10" />
-      <path d="M25 18c-1-6 2-10 8-11 1 6-2 10-8 11Z" />
-    </svg>
+    <img
+      src={categoryIconByKind[kind]}
+      alt=""
+      width="40"
+      height="40"
+      loading="lazy"
+      decoding="async"
+    />
   )
 }
 

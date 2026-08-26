@@ -3270,14 +3270,11 @@ svg {
   background: #f5dae3;
 }
 
-.fit-category__icon svg {
+.fit-category__icon img {
   width: 29px;
   height: 29px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
+  display: block;
+  object-fit: contain;
 }
 
 .fit-category b {
@@ -3742,13 +3739,13 @@ svg {
 .fit-category__icon {
   width: 42px;
   height: 42px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.48), 0 5px 12px rgba(70, 37, 29, 0.08);
+  background: transparent;
+  box-shadow: none;
 }
 
-.fit-category__icon svg {
-  width: 31px;
-  height: 31px;
-  stroke-width: 2;
+.fit-category__icon img {
+  width: 42px;
+  height: 42px;
 }
 
 .section-checkout-cta {
@@ -4233,12 +4230,15 @@ svg {
 }
 
 @media (max-width: 599px) {
+  .top-phone-scene {
+    overflow: clip;
+  }
+
   .top-phone-scene__chocolate {
     width: 100%;
     height: calc(100% + 300px);
     left: 0;
     top: -250px;
-    clip-path: inset(0 0 50px 0);
   }
 
   .top-phone-scene__chocolate::before {
@@ -4263,13 +4263,8 @@ svg {
   }
 
   .top-phone__screen > p {
-    max-width: 13ch;
-    font-size: clamp(1.08rem, 4.7vw, 1.24rem);
-    line-height: 1.02;
-    letter-spacing: -0.025em;
+    max-width: 12.5ch;
     overflow-wrap: normal;
-    word-break: normal;
-    hyphens: none;
   }
 }
 
