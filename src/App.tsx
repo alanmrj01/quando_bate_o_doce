@@ -31,7 +31,7 @@ export default function App() {
     <div className="site-shell">
       <header className="topbar" aria-label="Cabeçalho">
         <a className="wordmark" href="#inicio" aria-label="Quando Bate o Doce — início">
-          <span className="apple-mark" aria-hidden="true" />
+          <span className="apple-mark apple-mark--asset" aria-hidden="true" />
           <b>QUANDO BATE<br />O DOCE</b>
         </a>
         <a className="topbar-link" href="#produto">ver o guia <span aria-hidden="true">↓</span></a>

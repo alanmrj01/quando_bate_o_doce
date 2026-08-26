@@ -2666,6 +2666,21 @@ svg {
   background: #a92f43;
 }
 
+.topbar .wordmark > .apple-mark--asset,
+.top-phone__brand > .apple-mark--asset {
+  border-radius: 0;
+  background: url("/qbd-apple-mark-v1.png") center / contain no-repeat;
+  box-shadow: none;
+  transform: none;
+}
+
+.topbar .wordmark > .apple-mark--asset::before,
+.topbar .wordmark > .apple-mark--asset::after,
+.top-phone__brand > .apple-mark--asset::before,
+.top-phone__brand > .apple-mark--asset::after {
+  content: none;
+}
+
 .hero.hero-editorial {
   --hero-wine: #942f42;
   --hero-wine-deep: #752334;

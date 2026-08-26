@@ -61,7 +61,7 @@ export function HeroGuideMockup() {
         <div className="top-phone__speaker" aria-hidden="true" />
         <div className="top-phone__screen">
           <div className="top-phone__brand">
-            <span className="apple-mark apple-mark--phone" aria-hidden="true" />
+            <span className="apple-mark apple-mark--phone apple-mark--asset" aria-hidden="true" />
             <span>QUANDO BATE O DOCE</span>
           </div>
           <p>O que está acontecendo agora?</p>

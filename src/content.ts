@@ -1,30 +1,30 @@
 export const quizQuestions = [
   {
-    question: 'Quando bate vontade de doce, você já ficou entre comer o que queria e sentir que estava saindo da dieta?',
-    options: [
-      { label: 'Sim, acontece comigo', value: 'sim' },
-      { label: 'Não muito', value: 'nao' },
-    ],
-  },
-  {
-    question: 'Depois do almoço, no fim da tarde ou à noite, a vontade de doce costuma aparecer mesmo quando você quer manter sua alimentação?',
+    question: 'Você sente vontade de comer algo doce no seu dia?',
     options: [
       { label: 'Sim', value: 'sim' },
-      { label: 'Raramente', value: 'nao' },
+      { label: 'Às vezes', value: 'nao' },
     ],
   },
   {
-    question: 'Quando procura uma opção fit, você acaba abrindo várias receitas ou produtos antes de decidir?',
+    question: 'Quando essa vontade aparece mais?',
+    options: [
+      { label: 'Depois do almoço', value: 'sim' },
+      { label: 'Fim da tarde ou noite', value: 'nao' },
+    ],
+  },
+  {
+    question: 'Quando ela aparece, você tenta continuar na dieta?',
     options: [
       { label: 'Sim, quase sempre', value: 'sim' },
-      { label: 'Não costumo', value: 'nao' },
+      { label: 'Nem sempre', value: 'nao' },
     ],
   },
   {
-    question: 'Ter opções fit e proteicas já organizadas para cada um desses momentos deixaria essa decisão mais simples?',
+    question: 'Quando quer doce, você busca uma opção fit ou improvisa?',
     options: [
-      { label: 'Sim, faria sentido', value: 'sim' },
-      { label: 'Não para mim', value: 'nao' },
+      { label: 'Busco uma opção fit', value: 'sim' },
+      { label: 'Acabo improvisando', value: 'nao' },
     ],
   },
 ] as const
