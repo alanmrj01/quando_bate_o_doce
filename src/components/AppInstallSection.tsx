@@ -50,7 +50,6 @@ export function AppInstallSection() {
         <p><strong>Você não procura receitas aleatórias.</strong><br />Você abre, escolhe a situação e vai direto para uma opção.</p>
       </div>
 
-      <img className="app-install-chocolate" src="/guide-food-icons/zero-sugar-chocolate.png" alt="" width="192" height="192" loading="lazy" decoding="async" aria-hidden="true" />
     </section>
   )
 }

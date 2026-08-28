@@ -1,12 +1,12 @@
 import { siteConfig } from '../config'
 import { CheckoutButton } from './CheckoutButton'
-import { HeroAppComposition } from './TopGuideMockups'
+import { AppFeatureIcon, HeroAppComposition } from './TopGuideMockups'
 
 const valueItems = [
-  { icon: '◉', title: siteConfig.price, copy: siteConfig.paymentLabel },
-  { icon: 'ϟ', title: 'Acesso imediato', copy: '' },
-  { icon: '▣', title: '100% digital', copy: 'sem frete' },
-  { icon: '▯', title: 'Uso no celular', copy: 'sempre com você' },
+  { icon: 'coin', title: siteConfig.price, copy: siteConfig.paymentLabel },
+  { icon: 'bolt', title: 'Acesso imediato', copy: '' },
+  { icon: 'screen', title: '100% digital', copy: 'acesso online' },
+  { icon: 'phone', title: 'Uso no celular', copy: 'sempre com você' },
 ] as const
 
 export function Hero() {
@@ -33,7 +33,7 @@ export function Hero() {
       <div className="app-value-strip" aria-label={`${siteConfig.price}, ${siteConfig.paymentLabel}`} data-reveal>
         {valueItems.map(({ icon, title, copy }) => (
           <span className="app-value-item" key={title}>
-            <i aria-hidden="true">{icon}</i>
+            <i aria-hidden="true"><AppFeatureIcon kind={icon} /></i>
             <span>
               <strong>{title}</strong>
               {copy && <small>{copy}</small>}

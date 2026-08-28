@@ -1,11 +1,11 @@
 import { siteConfig } from '../config'
 import { CheckoutButton } from './CheckoutButton'
-import { BrandAppPhone, SituationAppPhone } from './TopGuideMockups'
+import { AppFeatureIcon, BrandAppPhone, SituationAppPhone } from './TopGuideMockups'
 
 const dailySteps = [
-  ['1', '⌁', 'Abre pela situação'],
-  ['2', '♨', 'Escolhe a categoria'],
-  ['3', '✓', 'Vê a opção ideal para o momento'],
+  ['1', 'tap', 'Abre pela situação'],
+  ['2', 'grid', 'Escolhe a categoria'],
+  ['3', 'check', 'Vê a opção ideal para o momento'],
 ] as const
 
 export function AppDailyUseSection() {
@@ -19,12 +19,12 @@ export function AppDailyUseSection() {
             {dailySteps.map(([number, icon, label]) => (
               <article key={number}>
                 <span>{number}</span>
-                <i aria-hidden="true">{icon}</i>
+                <i aria-hidden="true"><AppFeatureIcon kind={icon} /></i>
                 <b>{label}</b>
               </article>
             ))}
           </div>
-          <div className="app-daily-note"><span aria-hidden="true">↻</span><p><strong>Rápido, prático e na palma da mão.</strong><br />Para você seguir firme, sem abrir mão do doce.</p></div>
+          <div className="app-daily-note"><span aria-hidden="true"><AppFeatureIcon kind="refresh" /></span><p><strong>Rápido, prático e na palma da mão.</strong><br />Para você seguir firme, sem abrir mão do doce.</p></div>
         </div>
 
         <div className="app-daily-phones">
@@ -38,8 +38,6 @@ export function AppDailyUseSection() {
         <CheckoutButton label="Quero ter isso no meu celular" source="app-daily-use" />
         <p><span aria-hidden="true">▢</span> Acesso imediato após a confirmação do pagamento.</p>
       </div>
-
-      <img className="app-daily-brigadeiro" src="/guide-food-icons/brigadeiro-fit.png" alt="" width="192" height="192" loading="lazy" decoding="async" aria-hidden="true" />
     </section>
   )
 }

@@ -1,18 +1,18 @@
-import { CategoryAppPhone } from './TopGuideMockups'
+import { AppFeatureIcon, CategoryAppPhone } from './TopGuideMockups'
 
 const valueCards = [
-  ['▣', 'APP NO CELULAR', 'nada de PDF para baixar. Acesso rápido, sempre que precisar.'],
-  ['▦', '37 SITUAÇÕES REAIS', 'do café da manhã à vontade noturna. Para o dia a dia de verdade.'],
-  ['♨', 'OPÇÕES FIT ORGANIZADAS', 'Receitas low carb, proteicas e saudáveis para cada momento.'],
-  ['ϟ', 'CONSULTA RÁPIDA', 'Encontre o que precisa em poucos toques, sem enrolação.'],
+  ['phone', 'APP NO CELULAR', 'nada de PDF para baixar. Acesso rápido, sempre que precisar.'],
+  ['grid', '37 SITUAÇÕES REAIS', 'do café da manhã à vontade noturna. Para o dia a dia de verdade.'],
+  ['bowl', 'OPÇÕES FIT ORGANIZADAS', 'Receitas low carb, proteicas e saudáveis para cada momento.'],
+  ['search', 'CONSULTA RÁPIDA', 'Encontre o que precisa em poucos toques, sem enrolação.'],
 ] as const
 
 const proofItems = [
-  ['☆', '37 situações', 'para cobrir sempre que precisar'],
-  ['ϟ', 'Consulta rápida', 'encontre o que combina no momento'],
-  ['▣', 'Pagamento único', 'acesso vitalício no seu celular'],
-  ['▯', 'No celular', 'sempre com você, onde estiver'],
-  ['⇩', 'Instalação rápida', 'e acesso imediato após o pagamento'],
+  ['grid', '37 situações', 'para cobrir sempre que precisar'],
+  ['bolt', 'Consulta rápida', 'encontre o que combina no momento'],
+  ['lock', 'Pagamento único', 'acesso vitalício no seu celular'],
+  ['phone', 'No celular', 'sempre com você, onde estiver'],
+  ['download', 'Instalação rápida', 'e acesso imediato após o pagamento'],
 ] as const
 
 export function AppValueSection() {
@@ -30,7 +30,7 @@ export function AppValueSection() {
           <div className="app-value-cards">
             {valueCards.map(([icon, title, copy]) => (
               <article key={title}>
-                <i aria-hidden="true">{icon}</i>
+                <i aria-hidden="true"><AppFeatureIcon kind={icon} /></i>
                 <div><h3>{title}</h3><p>{copy}</p></div>
               </article>
             ))}
@@ -58,12 +58,9 @@ export function AppValueSection() {
 
       <div className="app-proof-strip" aria-label="Benefícios do aplicativo">
         {proofItems.map(([icon, title, copy]) => (
-          <span key={title}><i aria-hidden="true">{icon}</i><b>{title}</b><small>{copy}</small></span>
+          <span key={title}><i aria-hidden="true"><AppFeatureIcon kind={icon} /></i><b>{title}</b><small>{copy}</small></span>
         ))}
       </div>
-
-      <img className="app-value-food app-value-food--left" src="/guide-food-icons/brigadeiro-fit.png" alt="" width="192" height="192" loading="lazy" decoding="async" aria-hidden="true" />
-      <img className="app-value-food app-value-food--right" src="/guide-food-icons/brigadeiro-fit.png" alt="" width="192" height="192" loading="lazy" decoding="async" aria-hidden="true" />
     </section>
   )
 }
