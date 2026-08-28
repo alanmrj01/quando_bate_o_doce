@@ -58,14 +58,14 @@ export const situationCategories = [
 ] as const
 
 export const deliverables = [
-  ['01', 'Guia Quando Bate o Doce'],
-  ['02', '37 situações organizadas'],
-  ['03', 'Mapa “O que está acontecendo agora?”'],
-  ['04', 'Índice clicável para consulta rápida'],
-  ['05', 'Opções fit e proteicas por situação'],
+  ['01', 'App Quando Bate o Doce'],
+  ['02', '37 situações organizadas para consulta'],
+  ['03', 'Tela “O que está acontecendo agora?”'],
+  ['04', 'Navegação rápida pela situação'],
+  ['05', 'Opções fit e proteicas por momento'],
   ['06', 'Categorias low carb, sem açúcar e chocolate zero'],
-  ['07', 'Receitas saudáveis e alternativas rápidas'],
-  ['08', 'Página “não quero cozinhar”'],
+  ['07', 'Lista-base do doce fit'],
+  ['08', 'Modo emergência para poucos minutos'],
 ] as const
 
 export const audienceFit = [
@@ -89,32 +89,32 @@ export const audienceNotFit = [
 
 export const faqItems = [
   {
-    question: 'É um livro de receitas?',
+    question: 'O que é o Quando Bate o Doce?',
     answer:
-      'Não. Receitas e opções fit fazem parte do material, mas tudo é organizado por situações — não como uma coleção genérica de sobremesas.',
+      'É um app de consulta rápida para abrir no celular quando a vontade de doce aparece. Você escolhe a situação e encontra opções fit organizadas para aquele momento.',
+  },
+  {
+    question: 'Como eu recebo o acesso?',
+    answer:
+      'Após a confirmação do pagamento, você recebe o acesso digital e as orientações para abrir a ferramenta no celular.',
+  },
+  {
+    question: 'Como adiciono à tela inicial?',
+    answer:
+      'As instruções de instalação mostram como adicionar o Quando Bate o Doce à tela inicial para abrir junto dos outros aplicativos.',
+  },
+  {
+    question: 'Funciona no celular?',
+    answer: 'Sim. A experiência é pensada para abrir e consultar diretamente pelo celular.',
+  },
+  {
+    question: 'Preciso baixar pela Play Store ou App Store?',
+    answer: 'Não. O acesso é digital e as orientações mostram como adicionar a ferramenta à tela inicial do seu próprio celular.',
   },
   {
     question: 'São realmente 37 situações?',
     answer:
-      'Sim. O guia organiza 37 situações relacionadas aos momentos em que a vontade de doce aparece e reúne opções fit e proteicas adequadas a cada contexto.',
-  },
-  {
-    question: 'Preciso seguir alguma ordem?',
-    answer:
-      'Não. É um material de consulta. Você pode ir diretamente para a situação que mais se parece com o momento atual.',
-  },
-  {
-    question: 'Posso acessar pelo celular?',
-    answer: 'Sim. O conteúdo é pensado para consulta prática em dispositivos móveis.',
-  },
-  {
-    question: 'Isso elimina a vontade de doce?',
-    answer: 'Não existe essa promessa. A proposta é facilitar sua decisão quando a vontade aparecer.',
-  },
-  {
-    question: 'Preciso comprar ingredientes especiais?',
-    answer:
-      'A proposta é reunir alternativas fit, proteicas e simples, incluindo possibilidades compatíveis com ingredientes e produtos de uma rotina comum.',
+      'Sim. O app organiza 37 situações reais e reúne categorias como brigadeiro fit, chocolate zero açúcar, opções proteicas, low carb, saudáveis e sem açúcar.',
   },
   {
     question: 'O acesso é imediato?',

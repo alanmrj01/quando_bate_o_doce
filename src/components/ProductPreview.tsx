@@ -10,10 +10,10 @@ export function ProductPreview() {
     <section className="preview-section section-block" id="produto" data-reveal>
       <div className="section-heading section-heading--split">
         <div>
-          <span className="section-index">04 / por dentro do guia</span>
-          <h2>Um guia para abrir quando a vontade aparece e encontrar opções fit organizadas pelo momento.</h2>
+          <span className="section-index">04 / por dentro do app</span>
+          <h2>Uma ferramenta para abrir quando a vontade aparece e encontrar opções fit organizadas pelo momento.</h2>
         </div>
-        <p>Páginas simuladas a partir da estrutura real do produto. O conteúdo completo permanece dentro do guia.</p>
+        <p>Telas simuladas a partir da estrutura real do produto. A consulta completa permanece dentro do app.</p>
       </div>
 
       <div className="preview-desk">

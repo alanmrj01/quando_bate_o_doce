@@ -9,7 +9,7 @@ export function ProductLogic() {
     <section className="logic-section section-block" data-reveal>
       <div className="section-heading section-heading--center">
         <span className="section-index">06 / prova do mecanismo</span>
-        <h2>Não é um livro com 37 receitas. São 37 situações que já começam pela dúvida que você realmente tem.</h2>
+        <h2>Não é uma biblioteca para percorrer. São 37 situações que já começam pela dúvida que você realmente tem.</h2>
       </div>
       <div className="logic-steps">
         {logicBlocks.map(([number, title, copy]) => (

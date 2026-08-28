@@ -1,6 +1,9 @@
 import { useEffect } from 'react'
 import { AudienceFit } from './components/AudienceFit'
 import { AudienceNotFit } from './components/AudienceNotFit'
+import { AppDailyUseSection } from './components/AppDailyUseSection'
+import { AppInstallSection } from './components/AppInstallSection'
+import { AppValueSection } from './components/AppValueSection'
 import { BaseIngredients } from './components/BaseIngredients'
 import { ChocolateSection } from './components/ChocolateSection'
 import { Deliverables } from './components/Deliverables'
@@ -32,13 +35,15 @@ export default function App() {
       <header className="topbar" aria-label="Cabeçalho">
         <a className="wordmark" href="#inicio" aria-label="Quando Bate o Doce — início">
           <span className="apple-mark apple-mark--asset" aria-hidden="true" />
-          <b>QUANDO BATE<br />O DOCE</b>
+          <b>Quando<br />Bate o Doce</b>
         </a>
-        <a className="topbar-link" href="#produto">ver o guia <span aria-hidden="true">↓</span></a>
       </header>
 
       <main>
         <Hero />
+        <AppInstallSection />
+        <AppValueSection />
+        <AppDailyUseSection />
         <Quiz />
         <PremiseSection />
         <SituationNavigator />
