@@ -22,8 +22,7 @@ export function Hero() {
             <span>nem sair da dieta.</span>
           </h1>
           <p>
-            O QBD organiza 37 situações no celular<br className="app-copy-break" />
-            para você não começar outra busca toda vez.
+            O QBD organiza 37 situações reais para você não precisar fazer pesquisas aleatórias toda vez.
           </p>
         </div>
 
