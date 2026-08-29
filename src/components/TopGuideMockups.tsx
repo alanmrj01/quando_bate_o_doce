@@ -148,7 +148,7 @@ export function HeroAppComposition() {
   return (
     <div className="app-hero-visual" data-reveal>
       <div className="app-hero-chocolate" aria-hidden="true">
-        <img src="/hero-chocolate-editorial.webp" alt="" width="720" height="480" loading="eager" decoding="async" fetchPriority="high" />
+        <img src="/qbd-chocolate-edge-composition-v1.png" alt="" width="1536" height="1024" loading="eager" decoding="async" fetchPriority="high" />
       </div>
 
       <div className="app-hero-phones">

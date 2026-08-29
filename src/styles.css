@@ -6201,13 +6201,19 @@ svg {
   }
 
   .app-hero-layout {
-    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     min-height: 710px;
   }
 
   .app-hero-copy h1 {
-    max-width: 14ch;
-    font-size: clamp(3rem, 4.5vw, 3.72rem);
+    max-width: 10.6em;
+    font-size: clamp(2.7rem, 3.5vw, 3.1rem);
+    line-height: 0.99;
+  }
+
+  .app-hero-copy > p {
+    max-width: 40ch;
+    font-size: 0.9rem;
   }
 
   .app-hero-visual {
@@ -6232,7 +6238,7 @@ svg {
   }
 
   .app-install-proof {
-    left: -354px;
+    left: -470px;
   }
 
   .app-fold--install,
@@ -6391,5 +6397,491 @@ svg {
   .app-phone--daily-situations,
   .app-phone--daily-brand {
     width: 116px;
+  }
+}
+
+/* QBD V5 — equivalência mobile com REF_01/REF_02 */
+.app-fold--install::before,
+.app-value-phone-wrap::after,
+.app-daily-phones::after {
+  background-image: url('/qbd-chocolate-edge-composition-v1.png');
+}
+
+@media (max-width: 599px) {
+  .app-fold--hero {
+    padding: 18px 18px 22px;
+  }
+
+  .app-hero-layout {
+    grid-template-columns: minmax(176px, 1.06fr) minmax(0, 0.94fr);
+    min-height: 500px;
+  }
+
+  .app-hero-copy h1 {
+    max-width: 9.4em;
+    font-size: clamp(1.18rem, 5vw, 1.28rem);
+    line-height: 1.015;
+    letter-spacing: -0.04em;
+  }
+
+  .app-hero-copy > p {
+    max-width: 24ch;
+    margin-top: 17px;
+    font-size: clamp(0.7rem, 2.75vw, 0.78rem);
+  }
+
+  .app-hero-visual {
+    height: 500px;
+  }
+
+  .app-hero-phones {
+    top: 2px;
+    right: -18px;
+    transform: scale(0.92);
+    transform-origin: top right;
+  }
+
+  .app-phone {
+    --phone-font: 5.45px;
+    width: 104px;
+  }
+
+  .app-phone--hero-categories {
+    margin-left: -17px;
+  }
+
+  .app-phone--situations h3 {
+    font-size: 1.92em;
+    line-height: 0.98;
+  }
+
+  .app-hero-chocolate {
+    width: 365px;
+    height: 238px;
+    right: -34px;
+    bottom: 18px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, rgba(0, 0, 0, 0.76) 16%, #000 35% 100%);
+    mask-image: linear-gradient(90deg, transparent 0, rgba(0, 0, 0, 0.76) 16%, #000 35% 100%);
+  }
+
+  .app-hero-chocolate img {
+    object-position: 72% 82%;
+    transform: scale(1.34);
+    transform-origin: 82% 90%;
+  }
+
+  .app-install-proof {
+    left: -166px;
+    bottom: 8px;
+  }
+
+  .app-phone--home-screen {
+    --phone-font: 5.35px;
+    width: 102px;
+  }
+
+  .app-install-proof > span {
+    width: 76px;
+    font-size: 0.82rem;
+  }
+
+  .app-value-strip {
+    margin-inline: 1px;
+  }
+
+  .app-value-item {
+    min-height: 72px;
+    gap: 6px;
+    padding-inline: 5px;
+  }
+
+  .app-value-item > i {
+    width: 1.22rem;
+    height: 1.22rem;
+    font-size: 1.22rem;
+  }
+
+  .app-value-item strong {
+    font-size: clamp(0.65rem, 2.4vw, 0.74rem);
+  }
+
+  .app-value-item small {
+    font-size: clamp(0.49rem, 1.75vw, 0.56rem);
+  }
+
+  .app-fold--install {
+    display: block;
+    padding: 38px 20px 30px;
+  }
+
+  .app-fold--install::before {
+    width: 250px;
+    height: 164px;
+    left: -82px;
+    bottom: -22px;
+    background-position: 70% 84%;
+    background-size: 165%;
+    opacity: 0.98;
+    transform: scaleX(-1);
+    -webkit-mask-image: radial-gradient(ellipse at 45% 72%, #000 38%, transparent 77%);
+    mask-image: radial-gradient(ellipse at 45% 72%, #000 38%, transparent 77%);
+  }
+
+  .app-install-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+    align-items: end;
+    gap: 18px;
+  }
+
+  .app-install-copy h2 {
+    font-size: clamp(1.68rem, 7.2vw, 1.9rem);
+    line-height: 0.98;
+  }
+
+  .app-install-copy > p {
+    margin: 0 0 3px;
+    font-size: 0.76rem;
+    line-height: 1.38;
+  }
+
+  .app-install-steps {
+    gap: 10px;
+    margin-top: 27px;
+  }
+
+  .app-install-step-visual {
+    min-height: 238px;
+    border-color: rgba(81, 45, 38, 0.1);
+    background: rgba(255, 250, 244, 0.23);
+  }
+
+  .app-phone--step,
+  .app-phone--step.app-phone--home-screen {
+    --phone-font: 5px;
+    width: min(91px, 103%);
+  }
+
+  .app-step-number {
+    width: 27px;
+    height: 27px;
+    font-size: 0.84rem;
+  }
+
+  .app-install-steps > article + article::before {
+    left: -13px;
+    top: 111px;
+    font-size: 1.4rem;
+  }
+
+  .app-install-steps h3 {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    line-height: 1.08;
+  }
+
+  .app-install-steps p {
+    font-size: 0.59rem;
+    line-height: 1.32;
+  }
+
+  .app-install-summary {
+    grid-column: auto;
+    width: min(100%, 326px);
+    margin: 22px auto 0;
+    padding: 12px 16px;
+  }
+
+  .app-install-summary p {
+    font-size: 0.68rem;
+  }
+
+  .app-fold--value {
+    padding: 40px 20px 20px;
+  }
+
+  .app-value-main {
+    grid-template-columns: minmax(0, 1.08fr) minmax(148px, 0.92fr);
+    grid-template-rows: auto auto auto;
+    gap: 0 14px;
+  }
+
+  .app-value-copy {
+    display: contents;
+  }
+
+  .app-value-copy h2 {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+    font-size: clamp(1.34rem, 5.55vw, 1.55rem);
+    line-height: 1.01;
+  }
+
+  .app-value-copy > p {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 28ch;
+    margin-top: 15px;
+    font-size: 0.7rem;
+    line-height: 1.42;
+  }
+
+  .app-value-phone-wrap {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    min-height: 365px;
+  }
+
+  .app-phone--value {
+    --phone-font: 7.7px;
+    width: 151px;
+  }
+
+  .app-value-cards {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .app-value-cards article {
+    min-height: 112px;
+    grid-template-columns: 34px minmax(0, 1fr);
+    gap: 10px;
+    padding: 13px 11px;
+  }
+
+  .app-value-cards i {
+    width: 31px;
+    height: 31px;
+    font-size: 1.75rem;
+  }
+
+  .app-value-cards h3 {
+    font-size: 0.78rem;
+    line-height: 1.16;
+  }
+
+  .app-value-cards p {
+    font-size: 0.61rem;
+    line-height: 1.38;
+  }
+
+  .app-value-phone-wrap::after,
+  .app-daily-phones::after {
+    width: 270px;
+    height: 185px;
+    right: -92px;
+    bottom: -8px;
+    background-position: 72% 84%;
+    background-size: cover;
+    opacity: 0.98;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, rgba(0, 0, 0, 0.75) 18%, #000 42% 100%);
+    mask-image: linear-gradient(90deg, transparent 0, rgba(0, 0, 0, 0.75) 18%, #000 42% 100%);
+  }
+
+  .app-value-phone-wrap::before,
+  .app-daily-phones::before {
+    display: none;
+  }
+
+  .app-bonus-panel {
+    gap: 20px;
+    margin-top: 22px;
+    padding: 34px 17px 19px;
+  }
+
+  .app-bonus-panel article {
+    grid-template-columns: 62px minmax(0, 1fr);
+    gap: 13px;
+  }
+
+  .app-bonus-panel article:last-of-type {
+    grid-template-columns: minmax(0, 1fr) 64px;
+  }
+
+  .app-bonus-panel h3 {
+    font-size: 1.02rem;
+  }
+
+  .app-bonus-panel p {
+    font-size: 0.61rem;
+    line-height: 1.4;
+  }
+
+  .app-proof-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 10px;
+  }
+
+  .app-proof-strip > span,
+  .app-proof-strip > span:nth-child(4),
+  .app-proof-strip > span:nth-child(5) {
+    grid-column: auto;
+    min-height: 70px;
+    border-top: 1px dotted rgba(255, 238, 216, 0.25);
+  }
+
+  .app-proof-strip > span:nth-child(1),
+  .app-proof-strip > span:nth-child(2) {
+    border-top: 0;
+  }
+
+  .app-proof-strip > span:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .app-proof-strip > span:nth-child(5) {
+    grid-column: 1 / -1;
+  }
+
+  .app-proof-strip i {
+    width: 1.25rem;
+    height: 1.25rem;
+    font-size: 1.25rem;
+  }
+
+  .app-proof-strip b {
+    font-size: 0.64rem;
+  }
+
+  .app-proof-strip small {
+    font-size: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .app-fold--daily {
+    padding: 42px 20px 26px;
+  }
+
+  .app-daily-main {
+    grid-template-columns: minmax(0, 1.12fr) minmax(142px, 0.88fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 0 14px;
+  }
+
+  .app-daily-copy {
+    display: contents;
+  }
+
+  .app-daily-copy h2 {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+    font-size: clamp(1.52rem, 6.25vw, 1.76rem);
+    line-height: 1.01;
+  }
+
+  .app-daily-copy > p {
+    grid-column: 1;
+    grid-row: 2;
+    margin-top: 16px;
+    font-size: 0.72rem;
+    line-height: 1.42;
+  }
+
+  .app-daily-phones {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    min-height: 390px;
+  }
+
+  .app-phone--daily-situations,
+  .app-phone--daily-brand {
+    --phone-font: 6.65px;
+    width: 136px;
+  }
+
+  .app-daily-steps {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    gap: 11px;
+    margin-top: 23px;
+  }
+
+  .app-daily-steps article {
+    min-height: 112px;
+    padding: 12px 8px;
+  }
+
+  .app-daily-steps article > span {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+
+  .app-daily-steps i {
+    width: 1.6rem;
+    height: 1.6rem;
+    font-size: 1.6rem;
+  }
+
+  .app-daily-steps b {
+    font-size: 0.68rem;
+    line-height: 1.2;
+  }
+
+  .app-daily-note {
+    grid-column: 1 / -1;
+    grid-row: 4;
+    width: min(100%, 330px);
+    margin: 18px auto 0;
+    padding: 12px 14px;
+  }
+
+  .app-daily-note p {
+    font-size: 0.65rem;
+  }
+
+  .app-daily-offer {
+    margin-top: 15px;
+    padding: 10px 12px 11px;
+  }
+
+  .app-daily-offer > div:first-child strong {
+    font-size: 1.18rem;
+  }
+
+  .app-daily-offer .primary-button {
+    min-height: 54px;
+  }
+}
+
+@media (min-width: 600px) {
+  .app-value-copy,
+  .app-daily-copy {
+    display: block;
+  }
+
+  .app-fold--install::before {
+    background-position: 72% 84%;
+    background-size: cover;
+  }
+
+  .app-hero-chocolate img,
+  .app-value-phone-wrap::after,
+  .app-daily-phones::after {
+    background-position: 72% 84%;
+  }
+}
+
+@media (max-width: 380px) {
+  .app-hero-phones {
+    right: -27px;
+    transform: scale(0.84);
+    transform-origin: top right;
+  }
+}
+
+@media (min-width: 900px) {
+  .app-install-step-visual {
+    min-height: 380px;
+  }
+
+  .app-phone--step,
+  .app-phone--step.app-phone--home-screen {
+    --phone-font: 7.8px;
+    width: 160px;
   }
 }
