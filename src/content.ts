@@ -1,30 +1,30 @@
 export const quizQuestions = [
   {
-    question: 'Quando bate vontade de doce, você já ficou entre comer o que queria e sentir que estava saindo da dieta?',
+    question: 'Quando bate a vontade de doce, você já ficou entre matar a vontade e não querer sair da dieta?',
     options: [
       { label: 'Sim, acontece comigo', value: 'sim' },
       { label: 'Não muito', value: 'nao' },
     ],
   },
   {
-    question: 'Depois do almoço, no fim da tarde ou à noite, a vontade de doce costuma aparecer mesmo quando você quer manter sua alimentação?',
+    question: 'Quando essa vontade costuma aparecer mais?',
     options: [
-      { label: 'Sim', value: 'sim' },
-      { label: 'Raramente', value: 'nao' },
+      { label: 'Depois do almoço', value: 'sim' },
+      { label: 'Fim da tarde ou à noite', value: 'nao' },
     ],
   },
   {
-    question: 'Quando procura uma opção fit, você acaba abrindo várias receitas ou produtos antes de decidir?',
+    question: 'Quando a vontade aparece, o que você costuma fazer?',
     options: [
-      { label: 'Sim, quase sempre', value: 'sim' },
-      { label: 'Não costumo', value: 'nao' },
+      { label: 'Procuro uma opção fit', value: 'sim' },
+      { label: 'Acabo improvisando', value: 'nao' },
     ],
   },
   {
-    question: 'Ter opções fit e proteicas já organizadas para cada um desses momentos deixaria essa decisão mais simples?',
+    question: 'Quando você quer uma opção fit, o que mais atrapalha?',
     options: [
-      { label: 'Sim, faria sentido', value: 'sim' },
-      { label: 'Não para mim', value: 'nao' },
+      { label: 'Não saber o que escolher', value: 'sim' },
+      { label: 'Ter que procurar várias opções', value: 'nao' },
     ],
   },
 ] as const
@@ -64,8 +64,8 @@ export const deliverables = [
   ['04', 'Navegação rápida pela situação'],
   ['05', 'Opções fit e proteicas por momento'],
   ['06', 'Categorias low carb, sem açúcar e chocolate zero'],
-  ['07', 'Lista-base do doce fit'],
-  ['08', 'Modo emergência para poucos minutos'],
+  ['07', 'Despensa Fit Essencial'],
+  ['08', 'Modo Emergência — opções para até 2 minutos'],
 ] as const
 
 export const audienceFit = [
@@ -91,7 +91,7 @@ export const faqItems = [
   {
     question: 'O que é o Quando Bate o Doce?',
     answer:
-      'É um app de consulta rápida para abrir no celular quando a vontade de doce aparece. Você escolhe a situação e encontra opções fit organizadas para aquele momento.',
+      'É uma ferramenta de consulta no celular para quando a vontade de doce aparece e você não quer sair da dieta. Você escolhe a situação e encontra opções fit organizadas para aquele momento.',
   },
   {
     question: 'Como eu recebo o acesso?',

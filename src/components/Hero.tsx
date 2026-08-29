@@ -5,7 +5,7 @@ import { AppFeatureIcon, HeroAppComposition } from './TopGuideMockups'
 const valueItems = [
   { icon: 'coin', title: siteConfig.price, copy: siteConfig.paymentLabel },
   { icon: 'bolt', title: 'Acesso imediato', copy: '' },
-  { icon: 'screen', title: '100% digital', copy: 'acesso online' },
+  { icon: 'screen', title: 'Consulta pronta', copy: 'sem nova busca' },
   { icon: 'phone', title: 'Uso no celular', copy: 'sempre com você' },
 ] as const
 
@@ -17,13 +17,13 @@ export function Hero() {
           <h1>
             Quando bate<br />
             a vontade de doce,<br />
-            <span>você abre o app e</span><br />
-            <span>encontra opções fit</span><br />
-            <span>para aquele momento.</span>
+            <span>você tem opções fit</span><br />
+            <span>sem improvisar</span><br />
+            <span>nem sair da dieta.</span>
           </h1>
           <p>
-            Instale no seu celular e tenha 37 situações<br className="app-copy-break" />
-            reais do dia para não procurar do zero.
+            O QBD organiza 37 situações no celular<br className="app-copy-break" />
+            para você não começar outra busca toda vez.
           </p>
         </div>
 

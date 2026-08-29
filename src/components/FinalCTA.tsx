@@ -9,7 +9,7 @@ export function FinalCTA() {
       <div className="final-cta__content">
         <span className="section-index section-index--light">16 / pronto para consultar</span>
         <h2>Na próxima vez que bater vontade de doce, abra o app pela situação — e encontre opções fit já organizadas.</h2>
-        <p>Tenha o Quando Bate o Doce na tela inicial e consulte opções fit e proteicas em uma das 37 situações sempre que precisar.</p>
+        <p>Tenha o Quando Bate o Doce na tela inicial para não começar a procurar receitas, produtos e alternativas toda vez.</p>
         <div className="final-offer">
           <div>
             <strong>{siteConfig.price}</strong>

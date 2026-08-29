@@ -1,14 +1,14 @@
 import { AppFeatureIcon, CategoryAppPhone } from './TopGuideMockups'
 
 const valueCards = [
-  ['phone', 'APP NO CELULAR', 'nada de PDF para baixar. Acesso rápido, sempre que precisar.'],
-  ['grid', '37 SITUAÇÕES REAIS', 'do café da manhã à vontade noturna. Para o dia a dia de verdade.'],
+  ['phone', 'CONSULTA NO CELULAR', 'Abra pela situação quando a vontade aparecer.'],
+  ['grid', '37 SITUAÇÕES REAIS', 'Depois do almoço, fim da tarde, à noite e outros momentos.'],
   ['bowl', 'OPÇÕES FIT ORGANIZADAS', 'Receitas low carb, proteicas e saudáveis para cada momento.'],
-  ['search', 'CONSULTA RÁPIDA', 'Encontre o que precisa em poucos toques, sem enrolação.'],
+  ['search', 'SEM OUTRA BUSCA', 'Você abre pela situação e vai direto às opções.'],
 ] as const
 
 const proofItems = [
-  ['grid', '37 situações', 'para cobrir sempre que precisar'],
+  ['grid', 'Momentos reais', 'almoço, tarde, noite e mais'],
   ['bolt', 'Consulta rápida', 'encontre o que combina no momento'],
   ['lock', 'Pagamento único', 'acesso vitalício no seu celular'],
   ['phone', 'No celular', 'sempre com você, onde estiver'],
@@ -21,7 +21,7 @@ export function AppValueSection() {
       <div className="app-value-main">
         <div className="app-value-copy">
           <h2>
-            Não é um PDF solto.<br />
+            Não é mais uma busca.<br />
             É um <span>app de consulta rápida</span><br />
             para <span>37 situações reais do dia.</span>
           </h2>
@@ -48,10 +48,10 @@ export function AppValueSection() {
           <div className="app-notepad" aria-hidden="true">
             <i>✓ Aveia</i><i>✓ Cacau 100%</i><i>✓ Leite vegetal</i><i>✓ Pasta de amendoim</i><i>✓ Eritritol ou xilitol</i>
           </div>
-          <div><span>BÔNUS 1</span><h3>Lista-base do doce fit</h3><p>Ingredientes coringa para você ter sempre por perto e montar opções rápidas sem ficar sem saída.</p></div>
+          <div><span>BÔNUS 1</span><h3>Despensa Fit Essencial</h3><p>Uma lista prática do que vale a pena ter em casa para não ficar sem opção quando a vontade aparecer.</p></div>
         </article>
         <article>
-          <div><span>BÔNUS 2</span><h3>Modo emergência</h3><p>Atalhos para quando a vontade bate forte e você quer resolver em até 2 minutos, sem pensar demais e sem sair da dieta.</p></div>
+          <div><span>BÔNUS 2</span><h3>Modo Emergência — até 2 minutos</h3><p>Atalhos para quando a vontade aparece e você quer escolher rápido, sem começar outra busca.</p></div>
           <div className="app-stopwatch" aria-hidden="true"><span /><i /></div>
         </article>
       </div>

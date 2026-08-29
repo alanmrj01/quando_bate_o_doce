@@ -9,7 +9,7 @@ export function SituationNavigator() {
       <div className="section-heading section-heading--split">
         <div>
           <span className="section-index">03 / mecanismo</span>
-          <h2>Em vez de começar uma pesquisa, comece pela situação.</h2>
+          <h2>Em vez de começar outra busca, comece pela situação.</h2>
         </div>
         <p>O ponto de entrada não é uma receita. É o momento que já está acontecendo.</p>
       </div>

@@ -5,7 +5,7 @@ import { AppFeatureIcon, BrandAppPhone, SituationAppPhone } from './TopGuideMock
 const dailySteps = [
   ['1', 'tap', 'Abre pela situação'],
   ['2', 'grid', 'Escolhe a categoria'],
-  ['3', 'check', 'Vê a opção ideal para o momento'],
+  ['3', 'check', 'Vê as opções para o momento'],
 ] as const
 
 export function AppDailyUseSection() {
@@ -14,7 +14,7 @@ export function AppDailyUseSection() {
       <div className="app-daily-main">
         <div className="app-daily-copy">
           <h2>Para o dia a dia.<br /><span>Feito para usar de verdade.</span></h2>
-          <p>Quando bate a vontade de doce,<br />você não precisa fugir da dieta.<br />Abre o app, escolhe sua situação<br />e encontra opções práticas,<br />deliciosas e que funcionam.</p>
+          <p>Quando bate a vontade de doce,<br />você quer continuar na dieta.<br />Abre o QBD, escolhe a situação<br />e encontra opções fit<br />organizadas para aquele momento.</p>
           <div className="app-daily-steps" aria-label="Fluxo de uso do aplicativo">
             {dailySteps.map(([number, icon, label]) => (
               <article key={number}>

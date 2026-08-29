@@ -15,7 +15,7 @@ const installSteps = [
   },
   {
     number: '3',
-    title: 'Escolha a opção',
+    title: 'Escolha o tipo',
     copy: 'Veja as opções fit e escolha a que combina com você agora.',
     visual: <CategoryAppPhone className="app-phone--step" />,
   },
@@ -31,7 +31,7 @@ export function AppInstallSection() {
           como app no<br />
           <span>seu celular.</span>
         </h2>
-        <p>É rápido, prático e sempre<br />à mão quando a vontade<br />aparecer.</p>
+        <p>Não é para ler do começo ao fim.<br />É para abrir quando a vontade<br />aparecer.</p>
       </div>
 
       <div className="app-install-steps" aria-label="Como usar o Quando Bate o Doce">
@@ -47,7 +47,7 @@ export function AppInstallSection() {
 
       <div className="app-install-summary">
         <span aria-hidden="true">↻</span>
-        <p><strong>Você não procura receitas aleatórias.</strong><br />Você abre, escolhe a situação e vai direto para uma opção.</p>
+        <p><strong>Você não começa outra busca toda vez.</strong><br />Abre o QBD, escolhe a situação, o tipo e vê as opções.</p>
       </div>
 
     </section>
