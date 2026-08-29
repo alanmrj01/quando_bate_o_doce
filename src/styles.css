@@ -6885,3 +6885,82 @@ svg {
     width: 160px;
   }
 }
+
+/* QBD — correções cirúrgicas das dobras 1 e 2 */
+.topbar {
+  width: min(1180px, 100%);
+  margin-top: 0;
+  border: 0;
+  border-radius: 0;
+}
+
+.app-home-icons {
+  gap: 1em;
+}
+
+.app-icon > b {
+  width: 3.55em;
+  height: 3.55em;
+  border-radius: 0.9em;
+  font-size: 1em;
+}
+
+.app-icon > b .app-feature-icon {
+  width: 2.3em;
+  height: 2.3em;
+}
+
+.app-icon--qbd img {
+  width: 72%;
+  height: 72%;
+}
+
+.app-icon small {
+  font-size: 0.82em;
+  line-height: 1.08;
+}
+
+.app-phone--step.app-phone--categories h3 {
+  margin: 1.3em 0.4em 0.8em;
+  font-size: 1.55em;
+  line-height: 1.02;
+}
+
+.app-hero-action .primary-button .button-arrow {
+  position: relative;
+  width: 22px;
+  height: 30px;
+  border: 2px solid currentColor;
+  border-radius: 5px;
+  font-size: 0;
+}
+
+.app-hero-action .primary-button .button-arrow::before {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 2px;
+  top: 3px;
+  left: 50%;
+  border-radius: 999px;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+
+.app-hero-action .primary-button .button-arrow::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  bottom: 3px;
+  left: 50%;
+  border-radius: 50%;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 599px) {
+  .app-install-proof > span {
+    transform: translateY(-42px) rotate(-6deg);
+  }
+}
