@@ -1,6 +1,9 @@
 import { getActiveSiteConfig, getTrackingMode } from '../config'
 
-const storagePrefix = 'qbd_'
+const storagePrefixByMode = {
+  production: 'qbd_production_',
+  qa: 'qbd_qa_',
+} as const
 const attributionKeys = [
   'src',
   'utm_source',
@@ -17,6 +20,10 @@ const attributionKeySet = new Set<string>(attributionKeys)
 const metaSourceValues = new Set(['meta', 'facebook', 'instagram', 'fb', 'ig'])
 
 type AttributionKey = (typeof attributionKeys)[number]
+
+function getStoragePrefix(): string {
+  return storagePrefixByMode[getTrackingMode()]
+}
 
 export type AnalyticsAttribution = Partial<{
   utm_source: string
@@ -36,7 +43,7 @@ function isAttributionKey(key: string): key is AttributionKey {
 
 function safeSessionGet(key: string): string | null {
   try {
-    return window.sessionStorage.getItem(`${storagePrefix}${key}`)
+    return window.sessionStorage.getItem(`${getStoragePrefix()}${key}`)
   } catch {
     return null
   }
@@ -44,7 +51,7 @@ function safeSessionGet(key: string): string | null {
 
 function safeSessionSet(key: string, value: string): void {
   try {
-    window.sessionStorage.setItem(`${storagePrefix}${key}`, value)
+    window.sessionStorage.setItem(`${getStoragePrefix()}${key}`, value)
   } catch {
     // A landing continua funcional mesmo quando o storage está indisponível.
   }
@@ -52,7 +59,7 @@ function safeSessionSet(key: string, value: string): void {
 
 function safeSessionRemove(key: string): void {
   try {
-    window.sessionStorage.removeItem(`${storagePrefix}${key}`)
+    window.sessionStorage.removeItem(`${getStoragePrefix()}${key}`)
   } catch {
     // O modo continua sendo definido somente pela URL quando o storage está indisponível.
   }
@@ -154,6 +161,7 @@ export function getCheckoutUrl(): string | null {
 
   try {
     const url = new URL(checkoutBaseUrl)
+    if (url.protocol !== 'https:' || !url.hostname) return null
     getStoredAttribution().forEach(([key, value]) => {
       if (value && !url.searchParams.has(key)) url.searchParams.set(key, value)
     })
@@ -169,14 +177,31 @@ export function getCheckoutUrl(): string | null {
   }
 }
 
-export function emitCheckoutClick(source: string, configured: boolean): void {
+function createCheckoutClickId(): string {
+  if ('randomUUID' in crypto) return crypto.randomUUID()
+  return `checkout-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`
+}
+
+export function emitCheckoutClick(source: string, checkoutUrl: string | null): boolean {
+  if (!source || !checkoutUrl) return false
+
+  try {
+    const url = new URL(checkoutUrl)
+    if (url.protocol !== 'https:' || !url.hostname) return false
+  } catch {
+    return false
+  }
+
   window.dispatchEvent(
     new CustomEvent('qbd:checkout_click', {
       detail: {
+        clickId: createCheckoutClickId(),
         source,
-        configured,
+        configured: true,
         internalTest: getTrackingMode() === 'qa',
       },
     }),
   )
+
+  return true
 }

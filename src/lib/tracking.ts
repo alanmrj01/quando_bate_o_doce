@@ -14,6 +14,15 @@ type TrackerStatus = 'idle' | 'initializing' | 'initialized'
 type TrackerRuntime = {
   status: TrackerStatus
   initialization?: Promise<void>
+  attempts: number
+  retryTimer?: number
+}
+
+type CheckoutClickPayload = {
+  clickId: string
+  ctaPosition: string
+  attribution: ReturnType<typeof getAnalyticsAttribution>
+  queuedAt: number
 }
 
 type TrackingRuntime = {
@@ -23,6 +32,9 @@ type TrackingRuntime = {
   behavioralListenersInitialized: boolean
   checkoutListenerInitialized: boolean
   qaDiagnosticsLogged: boolean
+  pendingCheckoutClicks: Map<string, CheckoutClickPayload>
+  sentCheckoutEvents: Set<string>
+  checkoutQueueCleanupTimer?: number
 }
 
 declare global {
@@ -37,6 +49,10 @@ declare global {
 }
 
 const SCRIPT_LOAD_TIMEOUT_MS = 15_000
+const MAX_INITIALIZATION_ATTEMPTS = 3
+const INITIALIZATION_RETRY_BACKOFF_MS = [400, 1_200] as const
+const CHECKOUT_QUEUE_TTL_MS = 15_000
+const MAX_PENDING_CHECKOUT_CLICKS = 20
 const trackedOnce = new Set<string>()
 const pendingGa4Events = new Map<string, () => void>()
 const externalScriptLoads = new Map<string, Promise<void>>()
@@ -183,6 +199,7 @@ function trackGa4ProductView(mode: QbdMode): void {
 
 async function initializeMetaPixel(metaPixelId: string, mode: QbdMode): Promise<void> {
   const fbq = ensureMetaPixelStub()
+  flushPendingCheckoutClicksForPlatform('meta')
   await loadExternalScript('qbd-meta-pixel', 'https://connect.facebook.net/en_US/fbevents.js')
 
   trackOnce(`meta:init:${metaPixelId}`, () => fbq('init', metaPixelId))
@@ -195,6 +212,7 @@ async function initializeMetaPixel(metaPixelId: string, mode: QbdMode): Promise<
 
 async function initializeGa4(ga4MeasurementId: string, mode: QbdMode): Promise<void> {
   const gtag = ensureGa4Stub()
+  flushPendingCheckoutClicksForPlatform('ga4')
   await loadExternalScript(
     'qbd-ga4',
     `https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`,
@@ -343,11 +361,13 @@ function flushPendingGa4Events(): void {
 function createTrackingRuntime(mode: QbdMode): TrackingRuntime {
   return {
     mode,
-    meta: { status: 'idle' },
-    ga4: { status: 'idle' },
+    meta: { status: 'idle', attempts: 0 },
+    ga4: { status: 'idle', attempts: 0 },
     behavioralListenersInitialized: false,
     checkoutListenerInitialized: false,
     qaDiagnosticsLogged: false,
+    pendingCheckoutClicks: new Map(),
+    sentCheckoutEvents: new Set(),
   }
 }
 
@@ -364,27 +384,52 @@ function startTrackerInitialization(
   onInitialized?: () => void,
 ): Promise<void> {
   if (tracker.status === 'initialized') return Promise.resolve()
-  if (tracker.status === 'initializing' && tracker.initialization) {
-    return tracker.initialization
-  }
+  if (tracker.initialization) return tracker.initialization
+  if (tracker.attempts >= MAX_INITIALIZATION_ATTEMPTS) return Promise.resolve()
 
-  tracker.status = 'initializing'
-  updateInitializedFlag(runtime)
+  async function runAttempt(): Promise<void> {
+    tracker.status = 'initializing'
+    tracker.attempts += 1
+    updateInitializedFlag(runtime)
 
-  const initialization = initialize()
-    .then(() => {
+    try {
+      await initialize()
       tracker.status = 'initialized'
       onInitialized?.()
-    })
-    .catch((error: unknown) => {
+      return
+    } catch (error: unknown) {
       tracker.status = 'idle'
-      console.warn(`[QBD tracking] ${trackerName} initialization failed; retry is available.`, error)
-      throw error
-    })
-    .finally(() => {
-      tracker.initialization = undefined
       updateInitializedFlag(runtime)
-    })
+
+      if (tracker.attempts >= MAX_INITIALIZATION_ATTEMPTS) {
+        console.warn(
+          `[QBD tracking] ${trackerName} initialization failed after ${tracker.attempts} attempts.`,
+          error,
+        )
+        throw error
+      }
+
+      const retryDelay =
+        INITIALIZATION_RETRY_BACKOFF_MS[tracker.attempts - 1] ??
+        INITIALIZATION_RETRY_BACKOFF_MS[INITIALIZATION_RETRY_BACKOFF_MS.length - 1]
+      console.warn(
+        `[QBD tracking] ${trackerName} initialization failed; retrying in ${retryDelay}ms.`,
+        error,
+      )
+      await new Promise<void>((resolve) => {
+        tracker.retryTimer = window.setTimeout(() => {
+          tracker.retryTimer = undefined
+          resolve()
+        }, retryDelay)
+      })
+      return runAttempt()
+    }
+  }
+
+  const initialization = runAttempt().finally(() => {
+    tracker.initialization = undefined
+    updateInitializedFlag(runtime)
+  })
 
   tracker.initialization = initialization
   return initialization
@@ -551,33 +596,79 @@ export function trackQuizComplete(): void {
   })
 }
 
-function trackCheckoutClick(event: Event): void {
-  const detail = (event as CustomEvent<{ source?: string }>).detail
-  const ctaPosition = detail?.source ?? 'unknown'
-  const runtime = window.__qbdTrackingState
-  if (!runtime) return
+type CheckoutClickEventDetail = {
+  clickId?: string
+  source?: string
+  configured?: boolean
+}
 
-  const mode = runtime.mode
-  const attribution = getAnalyticsAttribution()
+function getCheckoutSentKey(platform: 'ga4' | 'meta', clickId: string): string {
+  return `${platform}:${clickId}`
+}
 
-  if (runtime.ga4.status === 'initialized' && window.gtag) {
-    window.gtag('event', 'checkout_click', {
-      ...attribution,
-      event_category: 'commerce',
-      source: ctaPosition,
-      cta_position: ctaPosition,
-      product_id: siteConfig.analytics.productId,
-      offer_id: siteConfig.analytics.offerId,
-      price: siteConfig.analytics.price,
-      value: siteConfig.analytics.price,
-      currency: siteConfig.analytics.currency,
-      landing_version: siteConfig.analytics.landingVersion,
-    })
-    logQaEvent(mode, 'checkout_click')
+function rememberCheckoutDispatch(runtime: TrackingRuntime, key: string): void {
+  runtime.sentCheckoutEvents.add(key)
+}
+
+function removeExpiredCheckoutClicks(runtime: TrackingRuntime): void {
+  const expirationThreshold = Date.now() - CHECKOUT_QUEUE_TTL_MS
+  for (const [clickId, payload] of runtime.pendingCheckoutClicks) {
+    if (payload.queuedAt <= expirationThreshold) runtime.pendingCheckoutClicks.delete(clickId)
   }
+}
 
-  if (runtime.meta.status === 'initialized' && window.fbq) {
-    window.fbq('trackCustom', 'CheckoutClick', {
+function scheduleCheckoutQueueCleanup(runtime: TrackingRuntime): void {
+  if (runtime.checkoutQueueCleanupTimer !== undefined) {
+    window.clearTimeout(runtime.checkoutQueueCleanupTimer)
+    runtime.checkoutQueueCleanupTimer = undefined
+  }
+  if (runtime.pendingCheckoutClicks.size === 0) return
+
+  const oldestQueuedAt = Math.min(
+    ...Array.from(runtime.pendingCheckoutClicks.values(), (payload) => payload.queuedAt),
+  )
+  const delay = Math.max(0, oldestQueuedAt + CHECKOUT_QUEUE_TTL_MS - Date.now())
+  runtime.checkoutQueueCleanupTimer = window.setTimeout(() => {
+    runtime.checkoutQueueCleanupTimer = undefined
+    removeExpiredCheckoutClicks(runtime)
+    scheduleCheckoutQueueCleanup(runtime)
+  }, delay)
+}
+
+function dispatchGa4CheckoutClick(runtime: TrackingRuntime, payload: CheckoutClickPayload): boolean {
+  const sentKey = getCheckoutSentKey('ga4', payload.clickId)
+  if (runtime.sentCheckoutEvents.has(sentKey)) return true
+  if (!window.gtag) return false
+
+  const { ctaPosition, attribution } = payload
+  window.gtag('event', 'checkout_click', {
+    ...attribution,
+    event_category: 'commerce',
+    source: ctaPosition,
+    cta_position: ctaPosition,
+    product_id: siteConfig.analytics.productId,
+    offer_id: siteConfig.analytics.offerId,
+    price: siteConfig.analytics.price,
+    value: siteConfig.analytics.price,
+    currency: siteConfig.analytics.currency,
+    landing_version: siteConfig.analytics.landingVersion,
+    transport_type: 'beacon',
+  })
+  rememberCheckoutDispatch(runtime, sentKey)
+  logQaEvent(runtime.mode, 'checkout_click')
+  return true
+}
+
+function dispatchMetaCheckoutClick(runtime: TrackingRuntime, payload: CheckoutClickPayload): boolean {
+  const sentKey = getCheckoutSentKey('meta', payload.clickId)
+  if (runtime.sentCheckoutEvents.has(sentKey)) return true
+  if (!window.fbq) return false
+
+  const { ctaPosition, attribution } = payload
+  window.fbq(
+    'trackCustom',
+    'CheckoutClick',
+    {
       ...(attribution.campaign_id ? { campaign_id: attribution.campaign_id } : {}),
       ...(attribution.adset_id ? { adset_id: attribution.adset_id } : {}),
       ...(attribution.ad_id ? { ad_id: attribution.ad_id } : {}),
@@ -588,9 +679,59 @@ function trackCheckoutClick(event: Event): void {
       currency: siteConfig.analytics.currency,
       cta_position: ctaPosition,
       landing_version: siteConfig.analytics.landingVersion,
-    })
-    logQaEvent(mode, 'CheckoutClick')
+    },
+    { eventID: payload.clickId },
+  )
+  rememberCheckoutDispatch(runtime, sentKey)
+  logQaEvent(runtime.mode, 'CheckoutClick')
+  return true
+}
+
+function flushPendingCheckoutClicksForPlatform(platform: 'ga4' | 'meta'): void {
+  const runtime = window.__qbdTrackingState
+  if (!runtime) return
+
+  removeExpiredCheckoutClicks(runtime)
+  for (const [clickId, payload] of runtime.pendingCheckoutClicks) {
+    if (platform === 'ga4') dispatchGa4CheckoutClick(runtime, payload)
+    else dispatchMetaCheckoutClick(runtime, payload)
+
+    const ga4Sent = runtime.sentCheckoutEvents.has(getCheckoutSentKey('ga4', clickId))
+    const metaSent = runtime.sentCheckoutEvents.has(getCheckoutSentKey('meta', clickId))
+    if (ga4Sent && metaSent) runtime.pendingCheckoutClicks.delete(clickId)
   }
+  scheduleCheckoutQueueCleanup(runtime)
+}
+
+function queueCheckoutClick(runtime: TrackingRuntime, payload: CheckoutClickPayload): void {
+  const ga4Sent = runtime.sentCheckoutEvents.has(getCheckoutSentKey('ga4', payload.clickId))
+  const metaSent = runtime.sentCheckoutEvents.has(getCheckoutSentKey('meta', payload.clickId))
+  if (ga4Sent && metaSent) return
+
+  removeExpiredCheckoutClicks(runtime)
+  if (!runtime.pendingCheckoutClicks.has(payload.clickId)) {
+    if (runtime.pendingCheckoutClicks.size >= MAX_PENDING_CHECKOUT_CLICKS) {
+      const oldestClickId = runtime.pendingCheckoutClicks.keys().next().value
+      if (typeof oldestClickId === 'string') runtime.pendingCheckoutClicks.delete(oldestClickId)
+    }
+    runtime.pendingCheckoutClicks.set(payload.clickId, payload)
+  }
+
+  flushPendingCheckoutClicksForPlatform('ga4')
+  flushPendingCheckoutClicksForPlatform('meta')
+}
+
+function trackCheckoutClick(event: Event): void {
+  const detail = (event as CustomEvent<CheckoutClickEventDetail>).detail
+  const runtime = window.__qbdTrackingState
+  if (!runtime || !detail?.configured || !detail.clickId || !detail.source) return
+
+  queueCheckoutClick(runtime, {
+    clickId: detail.clickId,
+    ctaPosition: detail.source,
+    attribution: getAnalyticsAttribution(),
+    queuedAt: Date.now(),
+  })
 }
 
 export function initializeTracking(): Promise<void> {

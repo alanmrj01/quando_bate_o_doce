@@ -14,8 +14,9 @@ export function CheckoutButton({ label, source, className = '' }: CheckoutButton
   const checkoutHref = getCheckoutUrl()
 
   function handleClick() {
-    emitCheckoutClick(source, Boolean(checkoutHref))
-    if (!checkoutHref) setMessage('Checkout ainda não configurado.')
+    if (!emitCheckoutClick(source, checkoutHref)) {
+      setMessage('Checkout ainda não configurado.')
+    }
   }
 
   useEffect(() => {
